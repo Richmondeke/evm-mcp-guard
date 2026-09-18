@@ -113,6 +113,57 @@ function openProposalDetailsModal() {
 }
 
 // Card Flow 5: Add Approved App / Protocol
+function toggleActionChip(btn) {
+  btn.classList.toggle('active');
+  updateSelectedActionsPreview();
+}
+
+function addCustomAction() {
+  const input = document.getElementById('custom-action-input');
+  const val = input.value.trim();
+  if (!val) return;
+  const grid = document.getElementById('action-chip-grid');
+  const existing = grid ? Array.from(grid.querySelectorAll('[data-action]')).find(b => b.dataset.action === val.toLowerCase()) : null;
+  if (existing) {
+    existing.classList.add('active');
+  } else if (grid) {
+    const chip = document.createElement('button');
+    chip.className = 'action-chip active';
+    chip.dataset.action = val.toLowerCase();
+    chip.onclick = function() { toggleActionChip(this); };
+    chip.textContent = '🔧 ' + val;
+    grid.appendChild(chip);
+  }
+  input.value = '';
+  updateSelectedActionsPreview();
+}
+
+function updateSelectedActionsPreview() {
+  const grid = document.getElementById('action-chip-grid');
+  const preview = document.getElementById('selected-actions-preview');
+  if (!grid || !preview) return;
+  const selected = Array.from(grid.querySelectorAll('.action-chip.active')).map(b => b.dataset.action);
+  if (selected.length === 0) {
+    preview.textContent = 'No actions selected yet.';
+  } else {
+    preview.textContent = `✓ Allowed: ${selected.join(', ')}`;
+  }
+}
+
+function resetAddAppModal() {
+  // Reset all chips to inactive
+  const chips = document.querySelectorAll('#action-chip-grid .action-chip');
+  chips.forEach(c => c.classList.remove('active'));
+  const preview = document.getElementById('selected-actions-preview');
+  if (preview) preview.textContent = '';
+  const nameInput = document.getElementById('new-app-name');
+  if (nameInput) nameInput.value = '';
+  const addrInput = document.getElementById('new-app-address');
+  if (addrInput) addrInput.value = '';
+  const customInput = document.getElementById('custom-action-input');
+  if (customInput) customInput.value = '';
+}
+
 function submitNewApprovedApp() {
   const name = document.getElementById('new-app-name').value.trim();
   const address = document.getElementById('new-app-address').value.trim();
@@ -120,6 +171,11 @@ function submitNewApprovedApp() {
     showToast('Please enter an app name (like Uniswap or Aave)', 'info', 'Name Needed');
     return;
   }
+
+  const grid = document.getElementById('action-chip-grid');
+  const selectedActions = grid
+    ? Array.from(grid.querySelectorAll('.action-chip.active')).map(b => b.dataset.action)
+    : [];
 
   const list = document.getElementById('approved-apps-list');
   if (list) {
@@ -132,7 +188,7 @@ function submitNewApprovedApp() {
     card.innerHTML = `
       <div>
         <strong>${name}</strong>
-        <div style="font-size: 12px; color: var(--text-secondary);">${address ? address.slice(0, 10) + '...' : 'Verified Contract'}</div>
+        <div style="font-size: 12px; color: var(--text-secondary);">${address ? address.slice(0, 10) + '...' : 'Verified Contract'}${selectedActions.length ? ' · ' + selectedActions.join(', ') : ''}</div>
       </div>
       <span class="badge-approved">Approved</span>
     `;
@@ -142,10 +198,11 @@ function submitNewApprovedApp() {
   const logContainer = document.getElementById('dynamic-activity-log');
   const row = document.createElement('div');
   row.className = 'activity-row';
-  row.innerHTML = `<span style="color: #34D399; font-weight: bold;">✓</span><span>App approved: ${name}</span>`;
+  row.innerHTML = `<span style="color: #34D399; font-weight: bold;">✓</span><span>App approved: ${name}${selectedActions.length ? ' (' + selectedActions.join(', ') + ')' : ''}</span>`;
   if (logContainer) logContainer.prepend(row);
 
   closeModal('modal-add-app');
+  resetAddAppModal();
   showToast(`"${name}" is now on your approved list.`, 'success', 'App Approved');
 }
 
@@ -181,6 +238,7 @@ async function loadData() {
     document.getElementById('val-pending').textContent = data.pendingProposalsCount;
 
     await loadApprovals();
+    await loadAuditLogs();
   } catch (err) {
     console.error('Error fetching status:', err);
   }
@@ -352,3 +410,73 @@ async function rejectProposal(id) {
 // Initial Boot & Live Sync
 loadData();
 setInterval(loadData, 3000);
+
+async function loadAuditLogs() {
+  try {
+    const res = await fetch(`${API_BASE}/api/audit-logs`);
+    const logs = await res.json();
+    if (!Array.isArray(logs)) return;
+
+    // Render into main activity widget
+    const feedContainer = document.getElementById('dynamic-activity-log');
+    if (feedContainer) {
+      if (logs.length === 0) {
+        feedContainer.innerHTML = '<div class="activity-row"><span style="color: #34D399; font-weight: bold;">✓</span><span>Chedo Shield active &amp; listening</span></div>';
+      } else {
+        feedContainer.innerHTML = logs.slice(0, 6).map(log => formatAuditLogRow(log)).join('');
+      }
+    }
+
+    // Render into modal audit list
+    const modalList = document.getElementById('modal-audit-list');
+    if (modalList) {
+      if (logs.length === 0) {
+        modalList.innerHTML = '<div style="font-size: 13px; color: #9CA3AF; padding: 10px 0;">No activity recorded yet.</div>';
+      } else {
+        modalList.innerHTML = logs.map(log => formatAuditLogRow(log, true)).join('');
+      }
+    }
+  } catch (e) {
+    console.error('Error fetching audit logs:', e);
+  }
+}
+
+function formatAuditLogRow(log, isModal = false) {
+  let icon = '<span style="color: #34D399; font-weight: bold;">✓</span>';
+  let text = '';
+  const time = new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  if (log.status === 'BLOCKED') {
+    icon = '<span style="color: #F87171; font-weight: bold;">✕</span>';
+    const amt = log.details?.amountEth ? `${log.details.amountEth} ETH` : (log.details?.amount ? `${log.details.amount} USDC` : 'Move');
+    text = `${amt} blocked (${log.details?.reason || 'Safety limit'})`;
+  } else if (log.status === 'PENDING') {
+    icon = '<span style="color: #FBBF24; font-weight: bold;">⏳</span>';
+    const amt = log.details?.amountEth ? `${log.details.amountEth} ETH` : 'Move';
+    text = `${log.agentName || 'Bot'}: ${amt} waiting for your OK`;
+  } else if (log.status === 'REJECTED') {
+    icon = '<span style="color: #9CA3AF; font-weight: bold;">✕</span>';
+    text = `Declined: ${log.details?.reason || 'Declined by user'}`;
+  } else if (log.status === 'EXECUTED' || log.status === 'SUCCESS') {
+    icon = '<span style="color: #34D399; font-weight: bold;">✓</span>';
+    if (log.action === 'SYSTEM_BOOT') {
+      text = 'Chedo Wallet Shield activated';
+    } else if (log.action === 'APPROVE_PROPOSAL') {
+      text = 'Move approved by you';
+    } else if (log.txHash) {
+      text = `Sent onchain (Tx: ${log.txHash.slice(0, 8)}...)`;
+    } else {
+      text = log.details?.message || `${log.agentName || 'Bot'} action completed`;
+    }
+  } else {
+    text = log.action;
+  }
+
+  return `
+    <div class="activity-row">
+      ${icon}
+      <span style="flex: 1;">${text}</span>
+      <span style="font-size: 11px; color: #6B7280; margin-left: 8px;">${time}</span>
+    </div>
+  `;
+}

@@ -747,3 +747,177 @@ body {
 
 
 
+
+/* ==========================================================================
+   ACTION CHIP SELECTOR — Allowed Actions Picker
+   ========================================================================== */
+
+.action-chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.action-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 2px solid var(--border-subtle);
+  background: var(--surface-white);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.action-chip:hover {
+  border-color: #2D6EF0;
+  color: #2D6EF0;
+  transform: translateY(-1px);
+}
+
+.action-chip.active {
+  background: #2D6EF0;
+  border-color: #2D6EF0;
+  color: #FFFFFF;
+  box-shadow: 0 3px 10px rgba(45, 110, 240, 0.30);
+}
+
+.action-chip.active:hover {
+  background: #1a57d6;
+  border-color: #1a57d6;
+  color: #FFFFFF;
+}
+
+.btn-chip-add {
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: 2px solid var(--accent-cyan);
+  background: transparent;
+  color: var(--accent-cyan-text);
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.btn-chip-add:hover {
+  background: var(--accent-cyan);
+}
+
+/* ==========================================================================
+   SAFETY RULE CARDS
+   ========================================================================== */
+
+.safety-rule-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(255,255,255,0.45);
+  border: 1.5px solid rgba(255,255,255,0.7);
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+
+.safety-rule-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex: 1;
+}
+
+.safety-rule-icon {
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.safety-rule-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.safety-rule-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+
+.safety-rule-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.badge-protection {
+  background: rgba(16, 185, 129, 0.12);
+  color: #065F46;
+}
+
+.badge-warning {
+  background: rgba(251, 191, 36, 0.15);
+  color: #92400E;
+}
+
+/* ==========================================================================
+   TOGGLE SWITCH — Replaces plain checkbox in safety rules
+   ========================================================================== */
+
+.toggle-switch {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 46px;
+  height: 26px;
+  cursor: pointer;
+  margin-top: 2px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: #D1D5DB;
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 3px;
+  top: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background: #10B981;
+}
+
+.toggle-switch input:checked + .toggle-slider::before {
+  transform: translateX(20px);
+}
+

@@ -425,7 +425,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../demo-web')));
 
-app.get('/api/status', async (_req, res) => {
+const apiRouter = express.Router();
+
+apiRouter.get('/status', async (_req, res) => {
   res.json({
     name: 'Supler EVM Guard',
     version: '0.2.0',
@@ -441,11 +443,11 @@ app.get('/api/status', async (_req, res) => {
   });
 });
 
-app.get('/api/proposals', (_req, res) => {
+apiRouter.get('/proposals', (_req, res) => {
   res.json(Array.from(proposals.values()).reverse());
 });
 
-app.post('/api/proposals', async (req, res) => {
+apiRouter.post('/proposals', async (req, res) => {
   const { agentId = 'agent_quant_01', type, to, amountEth, token, amount, functionName } = req.body;
   if (!validAddress(to)) {
     return res.status(400).json({ error: 'Invalid recipient or contract address.' });
@@ -500,7 +502,7 @@ app.post('/api/proposals', async (req, res) => {
   res.json({ proposal, decision });
 });
 
-app.post('/api/proposals/:id/approve', (req, res) => {
+apiRouter.post('/proposals/:id/approve', (req, res) => {
   const p = proposals.get(req.params.id);
   if (!p) return res.status(404).json({ error: 'Proposal not found' });
   p.status = 'approved';
@@ -518,7 +520,7 @@ app.post('/api/proposals/:id/approve', (req, res) => {
   res.json({ success: true, proposal: p });
 });
 
-app.post('/api/proposals/:id/reject', (req, res) => {
+apiRouter.post('/proposals/:id/reject', (req, res) => {
   const p = proposals.get(req.params.id);
   if (!p) return res.status(404).json({ error: 'Proposal not found' });
   p.status = 'rejected';
@@ -537,7 +539,7 @@ app.post('/api/proposals/:id/reject', (req, res) => {
   res.json({ success: true, proposal: p });
 });
 
-app.post('/api/proposals/:id/execute', async (req, res) => {
+apiRouter.post('/proposals/:id/execute', async (req, res) => {
   const p = proposals.get(req.params.id);
   if (!p) return res.status(404).json({ error: 'Proposal not found' });
   if (p.status !== 'approved') {
@@ -595,9 +597,13 @@ app.post('/api/proposals/:id/execute', async (req, res) => {
   }
 });
 
-app.get('/api/agents', (_req, res) => res.json(policyEngine.getAgents()));
-app.get('/api/allowlists', (_req, res) => res.json(policyEngine.getAllowlists()));
-app.get('/api/audit-logs', (_req, res) => res.json(auditLogger.getLogs(100)));
+apiRouter.get('/agents', (_req, res) => res.json(policyEngine.getAgents()));
+apiRouter.get('/allowlists', (_req, res) => res.json(policyEngine.getAllowlists()));
+apiRouter.get('/audit-logs', (_req, res) => res.json(auditLogger.getLogs(100)));
+
+// Mount API router at both /api and / so it works seamlessly locally, on Vercel, or with stripped rewrites
+app.use('/api', apiRouter);
+app.use('/', apiRouter);
 
 // Start HTTP Server safely if not in serverless or stdio mode
 if (process.env.RUN_STDIO !== 'true' && !process.env.VERCEL) {

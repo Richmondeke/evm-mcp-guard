@@ -37,12 +37,9 @@
       </div>
       <div class="header-badges">
         <a href="token.html" class="link-token">🪙 $GUARD & Staking</a>
-        <div class="pill">
-          <span>Robinhood Chain Testnet</span>
-        </div>
         <div class="pill pill-green">
           <span class="dot-green"></span>
-          <span>Protection is ON</span>
+          <span>Live</span>
         </div>
       </div>
     </header>
@@ -264,26 +261,14 @@
           <div class="widget-header-title" style="color: #FFF;">Activity</div>
           <p style="font-size: 13px; color: #9CA3AF; margin-bottom: 14px;">Everything your AI apps do is recorded here.</p>
 
-          <div style="font-size: 12px; font-weight: 800; color: #9CA3AF; text-transform: uppercase; margin-bottom: 8px;">Today</div>
+          <div style="font-size: 12px; font-weight: 800; color: #9CA3AF; text-transform: uppercase; margin-bottom: 8px;">Live Feed</div>
 
-          <div class="activity-row">
-            <span style="color: #34D399; font-weight: bold;">✓</span>
-            <span>0.02 ETH sent (Policy Approved)</span>
+          <div id="dynamic-activity-log">
+            <div class="activity-row">
+              <span style="color: #34D399; font-weight: bold;">✓</span>
+              <span>Chedo Shield active &amp; listening</span>
+            </div>
           </div>
-          <div class="activity-row">
-            <span style="color: #34D399; font-weight: bold;">✓</span>
-            <span>USDC balance checked</span>
-          </div>
-          <div class="activity-row">
-            <span style="color: #F87171; font-weight: bold;">✕</span>
-            <span>0.08 ETH blocked (Limit: 0.05 ETH)</span>
-          </div>
-          <div class="activity-row">
-            <span style="color: #34D399; font-weight: bold;">✓</span>
-            <span>WETH deposit approved</span>
-          </div>
-
-          <div id="dynamic-activity-log"></div>
         </div>
         <footer class="widget-footer">
           <button class="footer-link" style="color: #FFF;" onclick="openModal('modal-audit')">View All Activity →</button>
@@ -483,38 +468,88 @@
     <div class="guard-widget widget-emerald modal-shell">
       <div class="widget-panel">
         <div class="modal-header-row">
-          <div class="widget-header-title">⚙️ Safety Rules</div>
+          <div class="widget-header-title">🛡️ Safety Rules</div>
           <button class="modal-close-btn" onclick="closeModal('modal-permissions')">✕</button>
         </div>
         <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">
-          Turn safety rules on or off with one tap.
+          These rules protect your wallet from bots doing anything you didn't expect. Turn them on or off any time.
         </p>
 
-        <div class="card-item" style="display: flex; justify-content: space-between; align-items: center;">
-          <div>
-            <strong>Safety Test-Run</strong>
-            <div style="font-size: 12px; color: var(--text-secondary);">Dry-run every move before sending so you never lose funds to a bug</div>
+        <!-- Rule 1: Safety Test-Run -->
+        <div class="safety-rule-card">
+          <div class="safety-rule-left">
+            <div class="safety-rule-icon">🔬</div>
+            <div>
+              <div class="safety-rule-title">Safety Test-Run</div>
+              <div class="safety-rule-desc">Every move is simulated first. If it looks risky, it's stopped before anything is sent.</div>
+              <span class="safety-rule-badge badge-protection">🟢 High Protection</span>
+            </div>
           </div>
-          <input type="checkbox" checked onchange="notifyPolicyChange('Safety Test-Run')">
+          <label class="toggle-switch">
+            <input type="checkbox" checked id="rule-simulation" onchange="notifyPolicyChange('Safety Test-Run')">
+            <span class="toggle-slider"></span>
+          </label>
         </div>
 
-        <div class="card-item" style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
-          <div>
-            <strong>Approved Apps Only</strong>
-            <div style="font-size: 12px; color: var(--text-secondary);">Bots can only touch protocols and contracts you’ve personally approved</div>
+        <!-- Rule 2: Approved Apps Only -->
+        <div class="safety-rule-card" style="margin-top: 10px;">
+          <div class="safety-rule-left">
+            <div class="safety-rule-icon">🔐</div>
+            <div>
+              <div class="safety-rule-title">Approved Apps Only</div>
+              <div class="safety-rule-desc">Bots can only interact with apps you personally approved. Unknown contracts are blocked.</div>
+              <span class="safety-rule-badge badge-protection">🟢 High Protection</span>
+            </div>
           </div>
-          <input type="checkbox" checked onchange="notifyPolicyChange('Approved Apps Only')">
+          <label class="toggle-switch">
+            <input type="checkbox" checked id="rule-allowlist" onchange="notifyPolicyChange('Approved Apps Only')">
+            <span class="toggle-slider"></span>
+          </label>
         </div>
 
-        <div class="card-item" style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
-          <div>
-            <strong>Ask Me First ($100+)</strong>
-            <div style="font-size: 12px; color: var(--text-secondary);">If any move is over $100, pause and ask for your OK before sending</div>
+        <!-- Rule 3: Ask Me First -->
+        <div class="safety-rule-card" style="margin-top: 10px;">
+          <div class="safety-rule-left">
+            <div class="safety-rule-icon">🙋</div>
+            <div>
+              <div class="safety-rule-title">Ask Me First</div>
+              <div class="safety-rule-desc">Any move over your limit pauses and waits for your OK. Nothing big happens without you.</div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-top: 6px;">
+                <span class="safety-rule-badge badge-protection">🟢 High Protection</span>
+                <span style="font-size: 11px; color: var(--text-secondary);">Threshold:</span>
+                <select class="guard-select" id="rule-threshold-select" style="font-size: 12px; padding: 2px 8px; height: 26px; width: auto;" onchange="notifyPolicyChange('Approval Threshold')">
+                  <option value="0.01">0.01 ETH (~$25)</option>
+                  <option value="0.05" selected>0.05 ETH (~$125)</option>
+                  <option value="0.1">0.1 ETH (~$250)</option>
+                  <option value="0.5">0.5 ETH (~$1,250)</option>
+                  <option value="1">1 ETH (~$2,500)</option>
+                </select>
+              </div>
+            </div>
           </div>
-          <input type="checkbox" checked onchange="notifyPolicyChange('Ask Me First')">
+          <label class="toggle-switch">
+            <input type="checkbox" checked id="rule-human-approval" onchange="notifyPolicyChange('Ask Me First')">
+            <span class="toggle-slider"></span>
+          </label>
         </div>
 
-        <button class="btn-guard-primary" style="margin-top: 16px;" onclick="savePermissionsModal()">Apply Safety Rules</button>
+        <!-- Rule 4: Spending Cap -->
+        <div class="safety-rule-card" style="margin-top: 10px;">
+          <div class="safety-rule-left">
+            <div class="safety-rule-icon">💸</div>
+            <div>
+              <div class="safety-rule-title">Spending Cap</div>
+              <div class="safety-rule-desc">Hard limit on how much a bot can spend per move. Goes over? Automatically blocked.</div>
+              <span class="safety-rule-badge badge-warning">🟡 Recommended</span>
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked id="rule-spending-cap" onchange="notifyPolicyChange('Spending Cap')">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <button class="btn-guard-primary" style="margin-top: 18px;" onclick="savePermissionsModal()">✓ Save Safety Rules</button>
       </div>
     </div>
   </div>
@@ -528,17 +563,38 @@
           <button class="modal-close-btn" onclick="closeModal('modal-add-app')">✕</button>
         </div>
         <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">
-          Tell Chedo which apps (like Uniswap, Aave, or Aerodrome) your bots are allowed to trade on.
+          Tell Chedo which apps your bots are allowed to use. Pick the actions they're allowed to do.
         </p>
 
         <label class="guard-label">App / Protocol Name</label>
         <input class="guard-input" type="text" id="new-app-name" placeholder="e.g. Uniswap, Aave, Aerodrome">
 
-        <label class="guard-label" style="margin-top: 10px;">Contract Address</label>
-        <input class="guard-input" type="text" id="new-app-address" placeholder="0x...">
+        <label class="guard-label" style="margin-top: 12px;">Contract Address</label>
+        <input class="guard-input" type="text" id="new-app-address" placeholder="0x... (optional)">
 
-        <label class="guard-label" style="margin-top: 10px;">Allowed Actions</label>
-        <input class="guard-input" type="text" id="new-app-functions" placeholder="deposit, swap, withdraw">
+        <label class="guard-label" style="margin-top: 14px;">What can bots do here?</label>
+        <p style="font-size: 12px; color: var(--text-secondary); margin: 0 0 10px 0;">Tap to allow. Tap again to remove.</p>
+        <div class="action-chip-grid" id="action-chip-grid">
+          <button class="action-chip" data-action="swap" onclick="toggleActionChip(this)">🔄 Swap</button>
+          <button class="action-chip" data-action="deposit" onclick="toggleActionChip(this)">⬇️ Deposit</button>
+          <button class="action-chip" data-action="withdraw" onclick="toggleActionChip(this)">⬆️ Withdraw</button>
+          <button class="action-chip" data-action="stake" onclick="toggleActionChip(this)">🔒 Stake</button>
+          <button class="action-chip" data-action="unstake" onclick="toggleActionChip(this)">🔓 Unstake</button>
+          <button class="action-chip" data-action="borrow" onclick="toggleActionChip(this)">💳 Borrow</button>
+          <button class="action-chip" data-action="repay" onclick="toggleActionChip(this)">✅ Repay</button>
+          <button class="action-chip" data-action="transfer" onclick="toggleActionChip(this)">➡️ Transfer</button>
+          <button class="action-chip" data-action="approve" onclick="toggleActionChip(this)">🔑 Approve</button>
+          <button class="action-chip" data-action="mint" onclick="toggleActionChip(this)">✨ Mint</button>
+          <button class="action-chip" data-action="burn" onclick="toggleActionChip(this)">🔥 Burn</button>
+          <button class="action-chip" data-action="collect" onclick="toggleActionChip(this)">💰 Collect Fees</button>
+        </div>
+
+        <div style="margin-top: 12px; display: flex; gap: 8px; align-items: center;">
+          <input class="guard-input" type="text" id="custom-action-input" placeholder="Add custom action..." style="flex: 1; margin: 0;">
+          <button class="btn-chip-add" onclick="addCustomAction()">+ Add</button>
+        </div>
+
+        <div id="selected-actions-preview" style="margin-top: 10px; font-size: 12px; color: var(--text-secondary); min-height: 20px;"></div>
 
         <button class="btn-guard-primary" style="margin-top: 16px;" onclick="submitNewApprovedApp()">✓ Approve App</button>
       </div>
