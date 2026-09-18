@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chedo — Give your AI apps a safe way to use crypto</title>
+  <link rel="icon" type="image/png" href="chedo-logo.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="guard-container">
+    <!-- Header -->
+    <header class="guard-header animate-enter">
+      <div class="brand-row">
+        <img src="chedo-logo.png" alt="Chedo Logo" class="brand-logo-img">
+        <div class="brand-text">
+          <h1>Chedo</h1>
+          <p>Give your AI apps a safe way to use crypto.</p>
+        </div>
+      </div>
+      <div class="header-badges">
+        <a href="token.html" class="link-token">🪙 $GUARD & Staking</a>
+        <div class="pill">
+          <span>Robinhood Chain Testnet</span>
+        </div>
+        <div class="pill pill-green">
+          <span class="dot-green"></span>
+          <span>Protection is ON</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Top 4 Summary Cards -->
+    <section class="widget-grid-4">
+      <!-- 1. Secure Wallet (Blue Shell) -->
+      <article class="guard-widget widget-blue animate-enter delay-1">
+        <div class="widget-panel">
+          <div class="widget-header-title">🔐 Secure Wallet</div>
+          <div class="widget-val-mono" id="val-wallet"><span class="skeleton skeleton-text"></span></div>
+          <div class="widget-subtext">Wallet protected by Chedo</div>
+        </div>
+        <footer class="widget-footer">
+          <button class="footer-link" onclick="scrollToSection('sec-apps')">Manage Wallet →</button>
+          <span>🛡️</span>
+        </footer>
+      </article>
+
+      <!-- 2. Treasury (Yellow Shell) -->
+      <article class="guard-widget widget-yellow animate-enter delay-2">
+        <div class="widget-panel">
+          <div class="widget-header-title">💰 Treasury</div>
+          <div class="widget-val-big" id="val-balance"><span class="skeleton skeleton-text"></span></div>
+          <div class="widget-subtext">Robinhood Chain Testnet</div>
+        </div>
+        <footer class="widget-footer">
+          <button class="footer-link" onclick="scrollToSection('sec-activity')">View Activity →</button>
+          <span>📈</span>
+        </footer>
+      </article>
+
+      <!-- 3. Spending Limits (Cyan Shell) -->
+      <article class="guard-widget widget-cyan animate-enter delay-3">
+        <div class="widget-panel">
+          <div class="widget-header-title">🛡️ Spending Limits</div>
+          <div class="widget-val-big" style="font-size: 17px;">0.05 ETH &bull; 100 USDC</div>
+          <div class="widget-subtext">Maximum allowed per transaction</div>
+        </div>
+        <footer class="widget-footer">
+          <button class="footer-link" onclick="scrollToSection('sec-permissions')">Manage Limits →</button>
+          <span>🔒</span>
+        </footer>
+      </article>
+
+      <!-- 4. Approvals (Coral Shell) -->
+      <article class="guard-widget widget-coral animate-enter delay-4">
+        <div class="widget-panel">
+          <div class="widget-header-title">✅ Approvals</div>
+          <div class="widget-val-big" id="val-pending"><span class="skeleton skeleton-pill"></span></div>
+          <div class="widget-subtext">Requests waiting for your approval</div>
+        </div>
+        <footer class="widget-footer">
+          <button class="footer-link" onclick="scrollToSection('sec-approvals')">View Requests →</button>
+          <span>📋</span>
+        </footer>
+      </article>
+    </section>
+
+    <!-- AI Activity Section -->
+    <h2 class="section-heading animate-enter delay-4">AI Activity</h2>
+    <p class="section-subheading animate-enter delay-4">See what your AI apps are trying to do before anything happens.</p>
+
+    <div class="widget-grid-2">
+      <!-- Live / Recent Proposal Card (Yellow Shell) -->
+      <article class="guard-widget widget-yellow animate-enter delay-5">
+        <div class="widget-panel">
+          <div class="widget-header-title" style="margin-bottom: 12px;">Request from Alpha Trader</div>
+          
+          <div class="card-item card-item-blocked">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+              <strong style="font-size: 16px;">Send 0.08 ETH</strong>
+              <span class="badge-blocked">🔴 Blocked</span>
+            </div>
+            <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 6px;">
+              To <code style="font-weight: 700; color: var(--text-primary);">0x8f2...91ac</code>
+            </div>
+            <div style="font-size: 12px; font-weight: 700; color: #B91C1C; margin-bottom: 4px;">
+              Limit: 0.05 ETH
+            </div>
+            <div style="font-size: 12px; color: var(--text-secondary);">
+              <strong>Why?</strong> This transaction is above your spending limit.
+            </div>
+          </div>
+
+          <div id="dynamic-proposals-feed">
+            <!-- Dynamically injected new proposals appear here -->
+          </div>
+        </div>
+        <footer class="widget-footer">
+          <button class="footer-link" onclick="scrollToSection('sec-test')">View Details →</button>
+          <span>‹ ›</span>
+        </footer>
+      </article>
+
+      <!-- Choose an AI App (Blue Shell) -->
+      <article class="guard-widget widget-blue animate-enter delay-5" id="sec-apps">
+        <div class="widget-panel">
+          <div class="widget-header-title" style="margin-bottom: 12px;">Choose an AI App</div>
+
+          <div class="card-item">
+            <strong style="font-size: 14px;">Alpha Trader</strong>
+            <div style="font-size: 13px; color: var(--text-secondary); margin-top: 2px;">
+              Can trade and send up to <strong>0.5 ETH/day</strong>
+            </div>
+          </div>
+
+          <div class="card-item">
+            <strong style="font-size: 14px;">Portfolio Monitor</strong>
+            <div style="font-size: 13px; color: var(--text-secondary); margin-top: 2px;">
+              Read-only access
+            </div>
+          </div>
+
+          <div class="card-item">
+            <strong style="font-size: 14px;">Security Guardian</strong>
+            <div style="font-size: 13px; color: var(--text-secondary); margin-top: 2px;">
+              Can manage up to <strong>10 ETH/day</strong>
+            </div>
+          </div>
+        </div>
+        <footer class="widget-footer">
+          <button class="footer-link" onclick="alert('All 3 AI agent profiles are securely configured and active in Chedo.')">Manage Access →</button>
+          <span>🤖</span>
+        </footer>
+      </article>
+    </div>
+
+    <!-- Permissions & Approved Apps -->
+    <div class="widget-grid-2">
+      <!-- What can your AI do? (Emerald Shell) -->
+      <article class="guard-widget widget-emerald animate-enter delay-6" id="sec-permissions">
+        <div class="widget-panel">
+          <div class="widget-header-title">What can your AI do?</div>
+          <p style="font-size: 13px; color: var(--text-secondary);">Choose exactly what each app is allowed to access.</p>
+
+          <div class="checkbox-group">
+            <label class="checkbox-row">
+              <input type="checkbox" checked onchange="notifyPolicyChange()">
+              <span>Send ETH</span>
+            </label>
+            <label class="checkbox-row">
+              <input type="checkbox" checked onchange="notifyPolicyChange()">
+              <span>Send USDC</span>
+            </label>
+            <label class="checkbox-row">
+              <input type="checkbox" checked onchange="notifyPolicyChange()">
+              <span>Use approved contracts</span>
+            </label>
+            <label class="checkbox-row">
+              <input type="checkbox" onchange="notifyPolicyChange()">
+              <span>Approve new tokens</span>
+            </label>
+            <label class="checkbox-row">
+              <input type="checkbox" onchange="notifyPolicyChange()">
+              <span>Change wallet settings</span>
+            </label>
+          </div>
+        </div>
+        <footer class="widget-footer">
+          <button class="footer-link" onclick="alert('Granular permission policies applied.')">Manage Permissions →</button>
+          <span>⚙️</span>
+        </footer>
+      </article>
+
+      <!-- Approved Apps (Cyan Shell) -->
+      <article class="guard-widget widget-cyan animate-enter delay-6">
+        <div class="widget-panel">
+          <div class="widget-header-title">Approved Apps</div>
+          <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Only approved apps can use your wallet.</p>
+
+          <div class="card-item" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong>WETH</strong>
+              <div style="font-size: 12px; color: var(--text-secondary);">Canonical Wrapped Ether</div>
+            </div>
+            <span class="badge-approved">Approved</span>
+          </div>
+
+          <div class="card-item" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong>USDC</strong>
+              <div style="font-size: 12px; color: var(--text-secondary);">Circle USD Coin</div>
+            </div>
+            <span class="badge-approved">Approved</span>
+          </div>
+
+          <div class="card-item" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong>Uniswap</strong>
+              <div style="font-size: 12px; color: var(--text-secondary);">Verified Router v3</div>
+            </div>
+            <span class="badge-approved">Approved</span>
+          </div>
+        </div>
+        <footer class="widget-footer">
+          <button class="footer-link" onclick="addNewAppPrompt()">+ Add App</button>
+          <span>📜</span>
+        </footer>
+      </article>
+    </div>
+
+    <!-- Activity & Test Playground -->
+    <div class="widget-grid-2">
+      <!-- Activity Feed (Dark Shell) -->
+      <article class="guard-widget widget-dark animate-enter delay-7" id="sec-activity">
+        <div class="widget-panel dark">
+          <div class="widget-header-title" style="color: #FFF;">Activity</div>
+          <p style="font-size: 13px; color: #9CA3AF; margin-bottom: 14px;">Everything your AI apps do is recorded here.</p>
+
+          <div style="font-size: 12px; font-weight: 800; color: #9CA3AF; text-transform: uppercase; margin-bottom: 8px;">Today</div>
+
+          <div class="activity-row">
+            <span style="color: #34D399; font-weight: bold;">✓</span>
+            <span>0.02 ETH sent</span>
+          </div>
+          <div class="activity-row">
+            <span style="color: #34D399; font-weight: bold;">✓</span>
+            <span>USDC balance checked</span>
+          </div>
+          <div class="activity-row">
+            <span style="color: #F87171; font-weight: bold;">✕</span>
+            <span>0.08 ETH blocked</span>
+          </div>
+          <div class="activity-row">
+            <span style="color: #34D399; font-weight: bold;">✓</span>
+            <span>WETH deposit approved</span>
+          </div>
+
+          <div id="dynamic-activity-log"></div>
+        </div>
+        <footer class="widget-footer">
+          <button class="footer-link" style="color: #FFF;" onclick="loadData()">View All Activity →</button>
+          <span>●</span>
+        </footer>
+      </article>
+
+      <!-- Test It (Yellow Shell) -->
+      <article class="guard-widget widget-yellow animate-enter delay-7" id="sec-test">
+        <div class="widget-panel">
+          <div class="widget-header-title">Test It</div>
+          <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Try sending a transaction and see how Chedo protects your wallet.</p>
+
+          <label class="guard-label">Choose an app</label>
+          <select class="guard-select" id="test-app">
+            <option value="agent_quant_01">Alpha Trader</option>
+            <option value="agent_analyst_01">Portfolio Monitor</option>
+            <option value="agent_admin_01">Security Guardian</option>
+          </select>
+
+          <label class="guard-label">What should it do?</label>
+          <select class="guard-select" id="test-action">
+            <option value="native_transfer">Send ETH</option>
+            <option value="token_transfer">Send USDC</option>
+            <option value="contract_call">Use Approved Contract</option>
+          </select>
+
+          <label class="guard-label">Amount</label>
+          <input class="guard-input" type="number" step="0.01" id="test-amount" value="0.08">
+
+          <label class="guard-label">Destination</label>
+          <input class="guard-input" type="text" id="test-dest" value="0x8f2c38A9E198D321c17244589d8Ac7399e2991ac">
+
+          <button class="btn-guard-primary" onclick="runTestRequest()">Send Test Request</button>
+        </div>
+        <footer class="widget-footer">
+          <span class="footer-link">Instant Policy Feedback</span>
+          <span>⚡</span>
+        </footer>
+      </article>
+    </div>
+
+    <!-- Human Approval Section -->
+    <article class="guard-widget widget-coral animate-enter delay-8" id="sec-approvals" style="margin-bottom: 24px;">
+      <div class="widget-panel">
+        <div class="widget-header-title">Human Approval</div>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 14px;">
+          Nothing happens without your permission when approval is required.
+        </p>
+
+        <div id="human-approval-box">
+          <div class="card-item" style="text-align: center; color: var(--text-secondary); font-weight: 600; padding: 20px;">
+            <span class="skeleton" style="width: 140px; height: 18px;"></span>
+          </div>
+        </div>
+      </div>
+      <footer class="widget-footer">
+        <span class="footer-link">1-Click Authorization Gate</span>
+        <span>✅</span>
+      </footer>
+    </article>
+
+    <!-- Bottom Security Banner -->
+    <article class="guard-widget widget-emerald animate-enter delay-8" style="margin-bottom: 30px;">
+      <div class="widget-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <div style="font-size: 16px; font-weight: 800; margin-bottom: 4px;">Chedo is protecting your wallet</div>
+            <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #065F46; margin-bottom: 2px;">
+              <span class="dot-green"></span> <strong>Protection ON</strong>
+            </div>
+            <div style="font-size: 13px; color: var(--text-secondary);">Your limits and permissions are active.</div>
+          </div>
+          <div>
+            <button class="btn-guard-primary" style="width: auto; padding: 10px 20px;" onclick="scrollToSection('sec-permissions')">View Security Settings →</button>
+          </div>
+        </div>
+      </div>
+      <footer class="widget-footer">
+        <span class="footer-link">Continuous Autonomous Safeguard</span>
+        <span>🛡️</span>
+      </footer>
+    </article>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,496 @@
+/* ==========================================================================
+   Super EVM Guard — Widget Design System
+   Satoshi Font Family | Soft-Surface Tactile Modular Cards
+   ========================================================================== */
+
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,900&display=swap');
+
+:root {
+  --canvas: #ECEEF2;
+  --surface-white: #FFFFFF;
+  --surface-dark: #14181D;
+  --text-primary: #121820;
+  --text-secondary: #5F6B7A;
+  --text-muted: #8C9BAE;
+  --border-subtle: #E3E8EF;
+  
+  /* Accent Shells */
+  --accent-yellow: #FDE046;
+  --accent-yellow-text: #4D3D00;
+  --accent-blue: #2D6EF0;
+  --accent-blue-text: #FFFFFF;
+  --accent-cyan: #7BD2FB;
+  --accent-cyan-text: #084360;
+  --accent-emerald: #10B981;
+  --accent-emerald-text: #FFFFFF;
+  --accent-coral: #FF6B6B;
+  --accent-coral-text: #FFFFFF;
+
+  --radius-widget: 26px;
+  --radius-panel: 18px;
+  --frame-padding: 8px;
+  --panel-padding: 20px;
+
+  --font-main: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--canvas);
+  color: var(--text-primary);
+  line-height: 1.45;
+  min-height: 100vh;
+  padding: 36px 20px 80px 20px;
+}
+
+.guard-container {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+/* Header */
+.guard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-icon {
+  width: 46px;
+  height: 46px;
+  background: var(--accent-blue);
+  color: white;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 900;
+  box-shadow: 0 4px 14px rgba(45, 110, 240, 0.25);
+}
+
+.brand-text h1 {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.8px;
+  color: var(--text-primary);
+}
+
+.brand-text p {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.header-badges {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.link-token {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: var(--accent-yellow);
+  color: var(--accent-yellow-text);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 3px 10px rgba(253, 224, 70, 0.4);
+  transition: transform 0.15s;
+}
+.link-token:hover { transform: scale(1.02); }
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--surface-white);
+  border: 1px solid var(--border-subtle);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.pill-green {
+  background: #ECFDF5;
+  border-color: #A7F3D0;
+  color: #065F46;
+}
+
+.dot-green {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+}
+
+/* Grid Layouts */
+.widget-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.widget-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.widget-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+/* The Core Accent Shell Widget */
+.guard-widget {
+  border-radius: var(--radius-widget);
+  padding: var(--frame-padding);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.guard-widget:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.07);
+}
+
+/* Shell Color Themes */
+.widget-blue { background-color: var(--accent-blue); color: var(--accent-blue-text); }
+.widget-yellow { background-color: var(--accent-yellow); color: var(--accent-yellow-text); }
+.widget-cyan { background-color: var(--accent-cyan); color: var(--accent-cyan-text); }
+.widget-emerald { background-color: var(--accent-emerald); color: var(--accent-emerald-text); }
+.widget-coral { background-color: var(--accent-coral); color: var(--accent-coral-text); }
+.widget-dark { background-color: var(--surface-dark); color: #FFFFFF; }
+
+/* Inner Content Panel */
+.widget-panel {
+  background-color: var(--surface-white);
+  color: var(--text-primary);
+  border-radius: var(--radius-panel);
+  padding: var(--panel-padding);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.widget-panel.dark {
+  background-color: var(--surface-dark);
+  color: #FFFFFF;
+}
+
+.widget-header-title {
+  font-size: 15px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.widget-val-big {
+  font-size: 20px;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+
+.widget-val-mono {
+  font-family: monospace;
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.widget-subtext {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* Footer Action Link */
+.widget-footer {
+  min-height: 38px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px 2px 10px;
+}
+
+.footer-link {
+  font-size: 12px;
+  font-weight: 800;
+  color: inherit;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.footer-link:hover { text-decoration: underline; }
+
+/* Section Titles */
+.section-heading {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -0.6px;
+  margin: 36px 0 6px 0;
+  color: var(--text-primary);
+}
+
+.section-subheading {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+/* Cards & Lists */
+.card-item {
+  background: #F8FAFC;
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+
+.card-item-blocked {
+  background: #FFF5F5;
+  border: 1px solid #FECDD3;
+}
+
+.badge-blocked {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #FEE2E2;
+  color: #DC2626;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.badge-approved {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #D1FAE5;
+  color: #059669;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+/* Checkboxes */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.checkbox-row input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent-blue);
+  cursor: pointer;
+}
+
+/* Form inputs for Playground */
+.guard-input, .guard-select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  background: #F8FAFC;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  outline: none;
+}
+
+.guard-input:focus, .guard-select:focus {
+  border-color: var(--accent-blue);
+  background: #FFFFFF;
+}
+
+.guard-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.btn-guard-primary {
+  background: var(--accent-blue);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(45, 110, 240, 0.3);
+  transition: all 0.15s;
+}
+.btn-guard-primary:hover {
+  background: #1d58c8;
+}
+
+.btn-guard-success {
+  background: var(--accent-emerald);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-guard-danger {
+  background: #FEE2E2;
+  color: #DC2626;
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+}
+
+/* Activity Feed */
+.activity-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-subtle);
+  animation: fadeInRow 0.3s ease-out;
+}
+
+/* ==========================================================================
+   Animations & Skeleton Loaders
+   ========================================================================== */
+@keyframes fadeInRow {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(1.15); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.dot-green {
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+/* Onload Stagger Animation Classes */
+.animate-enter {
+  animation: cardEnter 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.delay-1 { animation-delay: 0.05s; }
+.delay-2 { animation-delay: 0.12s; }
+.delay-3 { animation-delay: 0.18s; }
+.delay-4 { animation-delay: 0.24s; }
+.delay-5 { animation-delay: 0.30s; }
+.delay-6 { animation-delay: 0.36s; }
+.delay-7 { animation-delay: 0.42s; }
+.delay-8 { animation-delay: 0.48s; }
+
+/* Skeleton Loader Elements */
+.skeleton {
+  display: inline-block;
+  height: 1.15em;
+  background: linear-gradient(90deg, #E5E7EB 25%, #F3F4F6 50%, #E5E7EB 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+  vertical-align: middle;
+}
+
+.skeleton-text {
+  width: 110px;
+  height: 20px;
+}
+
+.skeleton-pill {
+  width: 50px;
+  height: 22px;
+}
+
+.brand-logo-img {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0 4px 14px rgba(45, 110, 240, 0.25);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.brand-logo-img:hover {
+  transform: scale(1.06) rotate(-2deg);
+}
+
