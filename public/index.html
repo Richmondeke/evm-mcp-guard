@@ -3,21 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Chedo — Give your AI apps a safe way to use crypto</title>
+  <title>Chedo — Safe Crypto for Your AI Apps</title>
   <link rel="icon" type="image/png" href="chedofav.png">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+  <!-- Chedo Floating Toast Notifications Container -->
+  <div id="chedo-toast-container" class="chedo-toast-container"></div>
 
   <div class="guard-container">
     <!-- Welcome Onboarding Banner -->
     <div class="welcome-banner animate-enter" id="welcome-banner">
       <div class="welcome-banner-text">
-        <h3>⚡ Welcome to Chedo Autonomous AI Guard</h3>
-        <p>Your wallet is shielded. AI agents (Claude, Cursor, custom bots) can propose trades, but cannot move funds beyond your policy ceilings.</p>
+        <h3>⚡ Welcome to Chedo!</h3>
+        <p>We make it safe for AI bots to help you trade crypto. You set the rules—bots can never spend your money without your permission.</p>
       </div>
       <div class="welcome-banner-action">
-        <button class="btn-guard-primary" style="width: auto; padding: 8px 16px; font-size: 13px;" onclick="scrollToSection('sec-test')">Quick Demo Flow →</button>
+        <button class="btn-guard-primary" style="width: auto; padding: 8px 16px; font-size: 13px;" onclick="scrollToSection('sec-test')">Try A Demo Move →</button>
         <button class="btn-welcome-dismiss" onclick="document.getElementById('welcome-banner').style.display='none'" title="Dismiss">✕</button>
       </div>
     </div>
@@ -45,23 +49,23 @@
 
     <!-- Top 4 Summary Cards -->
     <section class="widget-grid-4">
-      <!-- 1. Secure Wallet (Blue Shell) -->
+      <!-- 1. Your Wallet (Blue Shell) -->
       <article class="guard-widget widget-blue animate-enter delay-1">
         <div class="widget-panel">
-          <div class="widget-header-title">🔐 Secure Wallet</div>
+          <div class="widget-header-title">🔐 Your Wallet</div>
           <div class="widget-val-mono" id="val-wallet"><span class="skeleton skeleton-text"></span></div>
-          <div class="widget-subtext">Wallet protected by Chedo</div>
+          <div class="widget-subtext">Protected by Chedo</div>
         </div>
         <footer class="widget-footer">
-          <button class="footer-link" onclick="openModal('modal-wallet')">Manage Wallet →</button>
+          <button class="footer-link" onclick="openModal('modal-wallet')">Wallet Details →</button>
           <span>🛡️</span>
         </footer>
       </article>
 
-      <!-- 2. Treasury (Yellow Shell) -->
+      <!-- 2. Balance (Yellow Shell) -->
       <article class="guard-widget widget-yellow animate-enter delay-2">
         <div class="widget-panel">
-          <div class="widget-header-title">💰 Treasury</div>
+          <div class="widget-header-title">💰 Wallet Balance</div>
           <div class="widget-val-big" id="val-balance"><span class="skeleton skeleton-text"></span></div>
           <div class="widget-subtext">Robinhood Chain Testnet</div>
         </div>
@@ -76,10 +80,10 @@
         <div class="widget-panel">
           <div class="widget-header-title">🛡️ Spending Limits</div>
           <div class="widget-val-big" style="font-size: 17px;" id="val-limits-display">0.05 ETH &bull; 100 USDC</div>
-          <div class="widget-subtext">Maximum allowed per transaction</div>
+          <div class="widget-subtext">Maximum bots can spend per move</div>
         </div>
         <footer class="widget-footer">
-          <button class="footer-link" onclick="openModal('modal-limits')">Manage Limits →</button>
+          <button class="footer-link" onclick="openModal('modal-limits')">Change Limits →</button>
           <span>🔒</span>
         </footer>
       </article>
@@ -87,20 +91,20 @@
       <!-- 4. Approvals (Coral Shell) -->
       <article class="guard-widget widget-coral animate-enter delay-4">
         <div class="widget-panel">
-          <div class="widget-header-title">✅ Approvals</div>
+          <div class="widget-header-title">✅ Waiting for You</div>
           <div class="widget-val-big" id="val-pending"><span class="skeleton skeleton-pill"></span></div>
-          <div class="widget-subtext">Requests waiting for your approval</div>
+          <div class="widget-subtext">Moves waiting for your OK</div>
         </div>
         <footer class="widget-footer">
-          <button class="footer-link" onclick="scrollToSection('sec-approvals')">View Requests →</button>
+          <button class="footer-link" onclick="scrollToSection('sec-approvals')">Review Requests →</button>
           <span>📋</span>
         </footer>
       </article>
     </section>
 
     <!-- AI Activity Section -->
-    <h2 class="section-heading animate-enter delay-4">AI Activity</h2>
-    <p class="section-subheading animate-enter delay-4">See what your AI apps are trying to do before anything happens.</p>
+    <h2 class="section-heading animate-enter delay-4">What Your Bots Are Doing</h2>
+    <p class="section-subheading animate-enter delay-4">Real-time safety checks. See every move before it happens.</p>
 
     <div class="widget-grid-2">
       <!-- Live / Recent Proposal Card (Yellow Shell) -->
@@ -120,7 +124,7 @@
               Limit: 0.05 ETH
             </div>
             <div style="font-size: 12px; color: var(--text-secondary);">
-              <strong>Why?</strong> This transaction is above your spending limit.
+              <strong>Why?</strong> This move is over your 0.05 ETH safety limit.
             </div>
           </div>
 
@@ -137,7 +141,7 @@
       <!-- Choose an AI App (Blue Shell) -->
       <article class="guard-widget widget-blue animate-enter delay-5" id="sec-apps">
         <div class="widget-panel">
-          <div class="widget-header-title" style="margin-bottom: 12px;">Choose an AI App</div>
+          <div class="widget-header-title" style="margin-bottom: 12px;">Your AI Bots</div>
 
           <div class="card-item" style="cursor: pointer;" onclick="selectAppForTest('agent_quant_01')">
             <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -145,7 +149,7 @@
               <span style="font-size: 11px; font-weight: 700; color: var(--accent-blue);">Select ↗</span>
             </div>
             <div style="font-size: 13px; color: var(--text-secondary); margin-top: 2px;">
-              Can trade and send up to <strong>0.5 ETH/day</strong>
+              Trading bot &bull; Can spend up to <strong>0.5 ETH/day</strong>
             </div>
           </div>
 
@@ -155,7 +159,7 @@
               <span style="font-size: 11px; font-weight: 700; color: var(--accent-blue);">Select ↗</span>
             </div>
             <div style="font-size: 13px; color: var(--text-secondary); margin-top: 2px;">
-              Read-only access
+              Watch bot &bull; <strong>0 ETH spending power</strong> (Read-only)
             </div>
           </div>
 
@@ -165,12 +169,12 @@
               <span style="font-size: 11px; font-weight: 700; color: var(--accent-blue);">Select ↗</span>
             </div>
             <div style="font-size: 13px; color: var(--text-secondary); margin-top: 2px;">
-              Can manage up to <strong>10 ETH/day</strong>
+              Helper bot &bull; Can manage up to <strong>10 ETH/day</strong>
             </div>
           </div>
         </div>
         <footer class="widget-footer">
-          <button class="footer-link" onclick="openModal('modal-agents')">Manage Access →</button>
+          <button class="footer-link" onclick="openModal('modal-agents')">View Bot Permissions →</button>
           <span>🤖</span>
         </footer>
       </article>
@@ -178,37 +182,37 @@
 
     <!-- Permissions & Approved Apps -->
     <div class="widget-grid-2">
-      <!-- What can your AI do? (Emerald Shell) -->
+      <!-- What can your bots do? (Emerald Shell) -->
       <article class="guard-widget widget-emerald animate-enter delay-6" id="sec-permissions">
         <div class="widget-panel">
-          <div class="widget-header-title">What can your AI do?</div>
-          <p style="font-size: 13px; color: var(--text-secondary);">Choose exactly what each app is allowed to access.</p>
+          <div class="widget-header-title">What can your bots do?</div>
+          <p style="font-size: 13px; color: var(--text-secondary);">Turn permissions on or off with one tap.</p>
 
           <div class="checkbox-group">
             <label class="checkbox-row">
-              <input type="checkbox" id="perm-eth" checked onchange="notifyPolicyChange('ETH Transfers')">
+              <input type="checkbox" id="perm-eth" checked onchange="notifyPolicyChange('Send ETH')">
               <span>Send ETH</span>
             </label>
             <label class="checkbox-row">
-              <input type="checkbox" id="perm-usdc" checked onchange="notifyPolicyChange('USDC Transfers')">
+              <input type="checkbox" id="perm-usdc" checked onchange="notifyPolicyChange('Send USDC')">
               <span>Send USDC</span>
             </label>
             <label class="checkbox-row">
-              <input type="checkbox" id="perm-contracts" checked onchange="notifyPolicyChange('Contract Calls')">
-              <span>Use approved contracts</span>
+              <input type="checkbox" id="perm-contracts" checked onchange="notifyPolicyChange('Trade on Approved Apps')">
+              <span>Trade on approved apps</span>
             </label>
             <label class="checkbox-row">
-              <input type="checkbox" id="perm-tokens" onchange="notifyPolicyChange('Token Approvals')">
+              <input type="checkbox" id="perm-tokens" onchange="notifyPolicyChange('Approve New Tokens')">
               <span>Approve new tokens</span>
             </label>
             <label class="checkbox-row">
-              <input type="checkbox" id="perm-settings" onchange="notifyPolicyChange('Wallet Settings')">
+              <input type="checkbox" id="perm-settings" onchange="notifyPolicyChange('Change Wallet Settings')">
               <span>Change wallet settings</span>
             </label>
           </div>
         </div>
         <footer class="widget-footer">
-          <button class="footer-link" onclick="openModal('modal-permissions')">Manage Permissions →</button>
+          <button class="footer-link" onclick="openModal('modal-permissions')">Safety Rules →</button>
           <span>⚙️</span>
         </footer>
       </article>
@@ -223,7 +227,7 @@
             <div class="card-item" style="display: flex; justify-content: space-between; align-items: center;">
               <div>
                 <strong>WETH</strong>
-                <div style="font-size: 12px; color: var(--text-secondary);">Canonical Wrapped Ether</div>
+                <div style="font-size: 12px; color: var(--text-secondary);">Wrapped Ether</div>
               </div>
               <span class="badge-approved">Approved</span>
             </div>
@@ -231,7 +235,7 @@
             <div class="card-item" style="display: flex; justify-content: space-between; align-items: center;">
               <div>
                 <strong>USDC</strong>
-                <div style="font-size: 12px; color: var(--text-secondary);">Circle USD Coin</div>
+                <div style="font-size: 12px; color: var(--text-secondary);">Circle USD Stablecoin</div>
               </div>
               <span class="badge-approved">Approved</span>
             </div>
@@ -239,7 +243,7 @@
             <div class="card-item" style="display: flex; justify-content: space-between; align-items: center;">
               <div>
                 <strong>Uniswap</strong>
-                <div style="font-size: 12px; color: var(--text-secondary);">Verified Router v3</div>
+                <div style="font-size: 12px; color: var(--text-secondary);">Verified DEX Router</div>
               </div>
               <span class="badge-approved">Approved</span>
             </div>
@@ -290,10 +294,10 @@
       <!-- Test It (Yellow Shell) -->
       <article class="guard-widget widget-yellow animate-enter delay-7" id="sec-test">
         <div class="widget-panel">
-          <div class="widget-header-title">Test It</div>
-          <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Try sending a transaction and see how Chedo protects your wallet.</p>
+          <div class="widget-header-title">Test Your Bot</div>
+          <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Try sending crypto with a bot and watch Chedo's safety shield in action.</p>
 
-          <label class="guard-label">Choose an app</label>
+          <label class="guard-label">Choose a bot</label>
           <select class="guard-select" id="test-app">
             <option value="agent_quant_01">Alpha Trader</option>
             <option value="agent_analyst_01">Portfolio Monitor</option>
@@ -304,19 +308,19 @@
           <select class="guard-select" id="test-action">
             <option value="native_transfer">Send ETH</option>
             <option value="token_transfer">Send USDC</option>
-            <option value="contract_call">Use Approved Contract</option>
+            <option value="contract_call">Use Approved App</option>
           </select>
 
           <label class="guard-label">Amount</label>
           <input class="guard-input" type="number" step="0.01" id="test-amount" value="0.08">
 
-          <label class="guard-label">Destination</label>
+          <label class="guard-label">Recipient Address</label>
           <input class="guard-input" type="text" id="test-dest" value="0x8f2c38A9E198D321c17244589d8Ac7399e2991ac">
 
-          <button class="btn-guard-primary" onclick="runTestRequest()">Send Test Request</button>
+          <button class="btn-guard-primary" onclick="runTestRequest()">Try This Move →</button>
         </div>
         <footer class="widget-footer">
-          <span class="footer-link">Instant Policy Feedback</span>
+          <span class="footer-link">Instant Safety Check</span>
           <span>⚡</span>
         </footer>
       </article>
@@ -325,9 +329,9 @@
     <!-- Human Approval Section -->
     <article class="guard-widget widget-coral animate-enter delay-8" id="sec-approvals" style="margin-bottom: 24px;">
       <div class="widget-panel">
-        <div class="widget-header-title">Human Approval</div>
+        <div class="widget-header-title">Waiting for Your OK</div>
         <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 14px;">
-          Nothing happens without your permission when approval is required.
+          When a bot asks to move more than your threshold, it waits right here for your OK.
         </p>
 
         <div id="human-approval-box">
@@ -337,7 +341,7 @@
         </div>
       </div>
       <footer class="widget-footer">
-        <span class="footer-link">1-Click Authorization Gate</span>
+        <span class="footer-link">1-Tap Confirmation</span>
         <span>✅</span>
       </footer>
     </article>
@@ -351,15 +355,15 @@
             <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #065F46; margin-bottom: 2px;">
               <span class="dot-green"></span> <strong>Protection ON</strong>
             </div>
-            <div style="font-size: 13px; color: var(--text-secondary);">Your limits and permissions are active.</div>
+            <div style="font-size: 13px; color: var(--text-secondary);">Your limits and safety rules are actively shielding your funds.</div>
           </div>
           <div>
-            <button class="btn-guard-primary" style="width: auto; padding: 10px 20px;" onclick="openModal('modal-permissions')">View Security Settings →</button>
+            <button class="btn-guard-primary" style="width: auto; padding: 10px 20px;" onclick="openModal('modal-permissions')">View Safety Rules →</button>
           </div>
         </div>
       </div>
       <footer class="widget-footer">
-        <span class="footer-link">Continuous Autonomous Safeguard</span>
+        <span class="footer-link">24/7 Wallet Shield</span>
         <span>🛡️</span>
       </footer>
     </article>
@@ -375,25 +379,25 @@
     <div class="guard-widget widget-blue modal-shell">
       <div class="widget-panel">
         <div class="modal-header-row">
-          <div class="widget-header-title">🔐 Manage Secure Wallet</div>
+          <div class="widget-header-title">🔐 Your Wallet</div>
           <button class="modal-close-btn" onclick="closeModal('modal-wallet')">✕</button>
         </div>
         <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">
-          Your private keys are isolated in Chedo's hardware/HSM vault. AI agents only hold scoped delegation tickets.
+          Your crypto stays 100% in your control. AI bots never get your seed phrase or private keys—they can only make moves you’ve approved.
         </p>
 
-        <label class="guard-label">Signer Address</label>
+        <label class="guard-label">Your Wallet Address</label>
         <div class="card-item" style="font-family: monospace; font-size: 13px; word-break: break-all;" id="modal-wallet-address">
           0x742d35Cc6634C0532925a3b844Bc454e4438f44e
         </div>
 
-        <label class="guard-label" style="margin-top: 12px;">Active Network</label>
+        <label class="guard-label" style="margin-top: 12px;">Connected Network</label>
         <div class="card-item" style="display: flex; justify-content: space-between; align-items: center;">
           <div>
             <strong>Robinhood Chain Testnet</strong>
             <div style="font-size: 12px; color: var(--text-secondary);">Chain ID: 46630</div>
           </div>
-          <span class="badge-approved">Connected</span>
+          <span class="badge-approved">Active & Safe</span>
         </div>
 
         <button class="btn-guard-primary" style="margin-top: 16px;" onclick="copyWalletAddress()">📋 Copy Wallet Address</button>
@@ -406,23 +410,23 @@
     <div class="guard-widget widget-cyan modal-shell">
       <div class="widget-panel">
         <div class="modal-header-row">
-          <div class="widget-header-title">🛡️ Spending Limit Policy</div>
+          <div class="widget-header-title">🛡️ Set Spending Limits</div>
           <button class="modal-close-btn" onclick="closeModal('modal-limits')">✕</button>
         </div>
         <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">
-          Transactions exceeding these caps will be automatically blocked by the Chedo policy engine.
+          Set your safety caps. If a bot tries to send more than this amount, Chedo stops it in its tracks.
         </p>
 
-        <label class="guard-label">Max ETH Per Transaction</label>
+        <label class="guard-label">Max ETH per transfer</label>
         <input class="guard-input" type="number" step="0.01" id="input-limit-eth" value="0.05">
 
-        <label class="guard-label" style="margin-top: 10px;">Max USDC Per Transaction</label>
+        <label class="guard-label" style="margin-top: 10px;">Max USDC per transfer</label>
         <input class="guard-input" type="number" step="1" id="input-limit-usdc" value="100">
 
-        <label class="guard-label" style="margin-top: 10px;">Require Human Approval Above</label>
+        <label class="guard-label" style="margin-top: 10px;">Ask for my OK for any transfer over</label>
         <input class="guard-input" type="number" step="0.01" id="input-limit-threshold" value="0.02">
 
-        <button class="btn-guard-primary" style="margin-top: 16px;" onclick="saveSpendingLimits()">Save Policy Changes</button>
+        <button class="btn-guard-primary" style="margin-top: 16px;" onclick="saveSpendingLimits()">Save My Limits</button>
       </div>
     </div>
   </div>
@@ -432,20 +436,20 @@
     <div class="guard-widget widget-blue modal-shell">
       <div class="widget-panel">
         <div class="modal-header-row">
-          <div class="widget-header-title">🤖 AI App Identity & Permissions</div>
+          <div class="widget-header-title">🤖 Your AI Bots</div>
           <button class="modal-close-btn" onclick="closeModal('modal-agents')">✕</button>
         </div>
         <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">
-          Each connected agent executes under its own Role-Based Access Control (RBAC) ceiling.
+          Every bot gets its own role and spending limit, so no rogue app can touch your main balance.
         </p>
 
         <div class="card-item">
           <div style="display: flex; justify-content: space-between;">
-            <strong>Alpha Trader Bot</strong>
+            <strong>Alpha Trader</strong>
             <span class="badge-approved">Active</span>
           </div>
           <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">
-            Role: Trader &bull; Daily Quota: 0.5 ETH &bull; Allowed: Swaps & Transfers
+            Trading bot &bull; Allowed up to 0.5 ETH/day &bull; Trades approved tokens
           </div>
         </div>
 
@@ -455,7 +459,7 @@
             <span class="badge-approved">Active</span>
           </div>
           <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">
-            Role: Analyst &bull; Daily Quota: 0 ETH &bull; Allowed: Read-only balance & prices
+            Watch bot &bull; $0 spending power &bull; Only checks prices & balances
           </div>
         </div>
 
@@ -465,11 +469,11 @@
             <span class="badge-approved">Active</span>
           </div>
           <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">
-            Role: Admin &bull; Daily Quota: 10 ETH &bull; Allowed: Policy & vault rebalancing
+            Helper bot &bull; Up to 10 ETH/day &bull; Keeps safety settings active
           </div>
         </div>
 
-        <button class="btn-guard-primary" style="margin-top: 16px;" onclick="closeModal('modal-agents'); scrollToSection('sec-test');">Test An Agent in Playground →</button>
+        <button class="btn-guard-primary" style="margin-top: 16px;" onclick="closeModal('modal-agents'); scrollToSection('sec-test');">Test A Bot In Action →</button>
       </div>
     </div>
   </div>
@@ -479,38 +483,38 @@
     <div class="guard-widget widget-emerald modal-shell">
       <div class="widget-panel">
         <div class="modal-header-row">
-          <div class="widget-header-title">⚙️ Global Policy Permissions</div>
+          <div class="widget-header-title">⚙️ Safety Rules</div>
           <button class="modal-close-btn" onclick="closeModal('modal-permissions')">✕</button>
         </div>
         <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">
-          Instant policy toggles enforced before any smart contract call or transfer leaves your vault.
+          Turn safety rules on or off with one tap.
         </p>
 
         <div class="card-item" style="display: flex; justify-content: space-between; align-items: center;">
           <div>
-            <strong>Automated Simulation Gate</strong>
-            <div style="font-size: 12px; color: var(--text-secondary);">Simulate all state changes with eth_call pre-flight</div>
+            <strong>Safety Test-Run</strong>
+            <div style="font-size: 12px; color: var(--text-secondary);">Dry-run every move before sending so you never lose funds to a bug</div>
           </div>
-          <input type="checkbox" checked onchange="notifyPolicyChange('Simulation Gate')">
+          <input type="checkbox" checked onchange="notifyPolicyChange('Safety Test-Run')">
         </div>
 
         <div class="card-item" style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
           <div>
-            <strong>Strict Contract Allowlist</strong>
-            <div style="font-size: 12px; color: var(--text-secondary);">Block unverified or new smart contracts</div>
+            <strong>Approved Apps Only</strong>
+            <div style="font-size: 12px; color: var(--text-secondary);">Bots can only touch protocols and contracts you’ve personally approved</div>
           </div>
-          <input type="checkbox" checked onchange="notifyPolicyChange('Strict Allowlist')">
+          <input type="checkbox" checked onchange="notifyPolicyChange('Approved Apps Only')">
         </div>
 
         <div class="card-item" style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
           <div>
-            <strong>Dual-Signer Threshold</strong>
-            <div style="font-size: 12px; color: var(--text-secondary);">Require human co-signature on transactions > $100</div>
+            <strong>Ask Me First ($100+)</strong>
+            <div style="font-size: 12px; color: var(--text-secondary);">If any move is over $100, pause and ask for your OK before sending</div>
           </div>
-          <input type="checkbox" checked onchange="notifyPolicyChange('Dual-Signer')">
+          <input type="checkbox" checked onchange="notifyPolicyChange('Ask Me First')">
         </div>
 
-        <button class="btn-guard-primary" style="margin-top: 16px;" onclick="savePermissionsModal()">Apply All Permissions</button>
+        <button class="btn-guard-primary" style="margin-top: 16px;" onclick="savePermissionsModal()">Apply Safety Rules</button>
       </div>
     </div>
   </div>
@@ -520,23 +524,23 @@
     <div class="guard-widget widget-cyan modal-shell">
       <div class="widget-panel">
         <div class="modal-header-row">
-          <div class="widget-header-title">📜 Add Approved Protocol</div>
+          <div class="widget-header-title">📜 Add An Approved App</div>
           <button class="modal-close-btn" onclick="closeModal('modal-add-app')">✕</button>
         </div>
         <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">
-          Whitelisting a contract allows your AI apps to interact with it according to your limits.
+          Tell Chedo which apps (like Uniswap, Aave, or Aerodrome) your bots are allowed to trade on.
         </p>
 
-        <label class="guard-label">Protocol Name</label>
-        <input class="guard-input" type="text" id="new-app-name" placeholder="e.g. Aave v3, Aerodrome, Curve">
+        <label class="guard-label">App / Protocol Name</label>
+        <input class="guard-input" type="text" id="new-app-name" placeholder="e.g. Uniswap, Aave, Aerodrome">
 
         <label class="guard-label" style="margin-top: 10px;">Contract Address</label>
         <input class="guard-input" type="text" id="new-app-address" placeholder="0x...">
 
-        <label class="guard-label" style="margin-top: 10px;">Allowed Functions</label>
+        <label class="guard-label" style="margin-top: 10px;">Allowed Actions</label>
         <input class="guard-input" type="text" id="new-app-functions" placeholder="deposit, swap, withdraw">
 
-        <button class="btn-guard-primary" style="margin-top: 16px;" onclick="submitNewApprovedApp()">✓ Whitelist Contract</button>
+        <button class="btn-guard-primary" style="margin-top: 16px;" onclick="submitNewApprovedApp()">✓ Approve App</button>
       </div>
     </div>
   </div>
@@ -546,33 +550,33 @@
     <div class="guard-widget widget-dark modal-shell" style="max-width: 620px;">
       <div class="widget-panel dark">
         <div class="modal-header-row">
-          <div class="widget-header-title" style="color: #FFF;">📊 Complete Audit Log</div>
+          <div class="widget-header-title" style="color: #FFF;">📊 Activity History</div>
           <button class="modal-close-btn" onclick="closeModal('modal-audit')">✕</button>
         </div>
         <p style="font-size: 13px; color: #9CA3AF; margin-bottom: 16px;">
-          Chronological record of every AI tool call, policy evaluation, gas cost, and execution receipt.
+          A simple, clear record of every move your bots have made or tried to make.
         </p>
 
         <div id="modal-audit-list" style="max-height: 320px; overflow-y: auto; padding-right: 6px;">
           <div class="activity-row">
             <span style="color: #34D399; font-weight: bold;">✓</span>
-            <span>Policy Evaluation: Passed for 0.02 ETH to 0x8f2c...91ac</span>
+            <span>0.02 ETH sent to 0x8f2c...91ac (Approved)</span>
           </div>
           <div class="activity-row">
             <span style="color: #F87171; font-weight: bold;">✕</span>
-            <span>Policy Violation: Blocked 0.08 ETH (Exceeded limit of 0.05 ETH)</span>
+            <span>0.08 ETH blocked (Over your 0.05 ETH limit)</span>
           </div>
           <div class="activity-row">
             <span style="color: #34D399; font-weight: bold;">✓</span>
-            <span>Simulation: Gas estimate 21,000 units on Robinhood Chain</span>
+            <span>Test-run passed: ~21,000 gas units on Robinhood Chain</span>
           </div>
           <div class="activity-row">
             <span style="color: #34D399; font-weight: bold;">✓</span>
-            <span>Signer Handshake: Active isolated wallet initialized</span>
+            <span>Wallet shielded and connected</span>
           </div>
         </div>
 
-        <button class="btn-guard-primary" style="margin-top: 16px;" onclick="closeModal('modal-audit')">Close Activity</button>
+        <button class="btn-guard-primary" style="margin-top: 16px;" onclick="closeModal('modal-audit')">Close</button>
       </div>
     </div>
   </div>
@@ -582,7 +586,7 @@
     <div class="guard-widget widget-yellow modal-shell">
       <div class="widget-panel">
         <div class="modal-header-row">
-          <div class="widget-header-title">🔍 Proposal Details & Pre-Flight</div>
+          <div class="widget-header-title">🔍 Transaction Details</div>
           <button class="modal-close-btn" onclick="closeModal('modal-proposal-details')">✕</button>
         </div>
         
@@ -592,25 +596,25 @@
             <span class="badge-blocked">🔴 Blocked</span>
           </div>
           <div style="font-size: 13px; color: var(--text-secondary);">
-            Requesting Agent: <strong>Alpha Trader</strong> (Quant Bot)
+            Bot: <strong>Alpha Trader</strong>
           </div>
           <div style="font-size: 13px; color: var(--text-secondary); margin-top: 2px;">
             Recipient: <code>0x8f2c38A9E198D321c17244589d8Ac7399e2991ac</code>
           </div>
         </div>
 
-        <label class="guard-label">Policy Violation Reason</label>
+        <label class="guard-label">Why was it blocked?</label>
         <div class="card-item" style="color: #B91C1C; font-weight: 700; font-size: 13px;">
-          POLICY_LIMIT_EXCEEDED: 0.08 ETH exceeds maximum per-transaction limit of 0.05 ETH.
+          Too Big: 0.08 ETH is over your 0.05 ETH safety limit.
         </div>
 
-        <label class="guard-label" style="margin-top: 12px;">Simulation & State Diff</label>
+        <label class="guard-label" style="margin-top: 12px;">Test-Run & Gas</label>
         <div class="card-item" style="font-size: 12px; color: var(--text-secondary);">
-          Estimated Gas: <strong>21,000</strong> &bull; Revert Risk: <strong>0%</strong> &bull; Chain: <strong>Robinhood Chain (46630)</strong>
+          Estimated Gas: <strong>~21,000</strong> &bull; Revert Risk: <strong>0%</strong> &bull; Network: <strong>Robinhood Chain Testnet</strong>
         </div>
 
         <div style="display: flex; gap: 8px; margin-top: 16px;">
-          <button class="btn-guard-primary" onclick="openModal('modal-limits'); closeModal('modal-proposal-details');">Adjust Limits</button>
+          <button class="btn-guard-primary" onclick="openModal('modal-limits'); closeModal('modal-proposal-details');">Change Limits</button>
           <button class="btn-guard-danger" style="flex: 1;" onclick="closeModal('modal-proposal-details')">Dismiss</button>
         </div>
       </div>

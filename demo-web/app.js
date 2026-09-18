@@ -4,6 +4,45 @@ const API_BASE = window.location.origin;
 let globalWalletAddress = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e';
 let currentLimits = { eth: 0.05, usdc: 100, threshold: 0.02 };
 
+// ==========================================
+// Native Chedo Floating Toast Notifications
+// (Completely eliminates generic browser alerts)
+// ==========================================
+function showToast(message, type = 'success', title = '') {
+  let container = document.getElementById('chedo-toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'chedo-toast-container';
+    container.className = 'chedo-toast-container';
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement('div');
+  toast.className = `chedo-toast chedo-toast-${type}`;
+
+  const iconText = type === 'danger' ? '✕' : (type === 'info' ? 'ℹ' : '✓');
+  const defaultTitle = type === 'danger' ? 'Blocked by Chedo' : (type === 'info' ? 'Notice' : 'Success');
+
+  toast.innerHTML = `
+    <div class="chedo-toast-icon">${iconText}</div>
+    <div class="chedo-toast-content">
+      <div class="chedo-toast-title">${title || defaultTitle}</div>
+      <div class="chedo-toast-message">${message}</div>
+    </div>
+    <button class="chedo-toast-close" onclick="this.parentElement.remove()" title="Close">✕</button>
+  `;
+
+  container.prepend(toast);
+
+  // Auto-dismiss after 3.8s
+  setTimeout(() => {
+    toast.classList.add('toast-hiding');
+    setTimeout(() => {
+      if (toast.parentElement) toast.remove();
+    }, 300);
+  }, 3800);
+}
+
 function scrollToSection(id) {
   const el = document.getElementById(id);
   if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -29,7 +68,7 @@ function closeModalOnBackdrop(e, id) {
 // Card Flow 1: Manage Wallet
 function copyWalletAddress() {
   navigator.clipboard?.writeText(globalWalletAddress);
-  alert(`✓ Copied to clipboard:\n${globalWalletAddress}`);
+  showToast(globalWalletAddress, 'success', 'Address Copied!');
 }
 
 // Card Flow 2: Manage Limits
@@ -47,11 +86,11 @@ function saveSpendingLimits() {
   const logContainer = document.getElementById('dynamic-activity-log');
   const row = document.createElement('div');
   row.className = 'activity-row';
-  row.innerHTML = `<span style="color: #34D399; font-weight: bold;">✓</span><span>Spending limits updated: Max ${eth} ETH / ${usdc} USDC</span>`;
+  row.innerHTML = `<span style="color: #34D399; font-weight: bold;">✓</span><span>Spending caps updated: Max ${eth} ETH / ${usdc} USDC</span>`;
   if (logContainer) logContainer.prepend(row);
 
   closeModal('modal-limits');
-  alert(`✓ Policy Updated!\n\nMax per tx: ${eth} ETH • ${usdc} USDC`);
+  showToast(`Max per move: ${eth} ETH • ${usdc} USDC`, 'success', 'Spending Limits Saved');
 }
 
 // Card Flow 3: Select AI App from Card
@@ -64,7 +103,7 @@ function selectAppForTest(agentId) {
   const logContainer = document.getElementById('dynamic-activity-log');
   const row = document.createElement('div');
   row.className = 'activity-row';
-  row.innerHTML = `<span style="color: #60A5FA; font-weight: bold;">ℹ</span><span>Active app focused: ${agentId}</span>`;
+  row.innerHTML = `<span style="color: #60A5FA; font-weight: bold;">ℹ</span><span>Active bot selected: ${agentId}</span>`;
   if (logContainer) logContainer.prepend(row);
 }
 
@@ -78,7 +117,7 @@ function submitNewApprovedApp() {
   const name = document.getElementById('new-app-name').value.trim();
   const address = document.getElementById('new-app-address').value.trim();
   if (!name) {
-    alert('Please enter a protocol name (e.g. Aave v3)');
+    showToast('Please enter an app name (like Uniswap or Aave)', 'info', 'Name Needed');
     return;
   }
 
@@ -103,27 +142,27 @@ function submitNewApprovedApp() {
   const logContainer = document.getElementById('dynamic-activity-log');
   const row = document.createElement('div');
   row.className = 'activity-row';
-  row.innerHTML = `<span style="color: #34D399; font-weight: bold;">✓</span><span>Protocol Whitelisted: ${name}</span>`;
+  row.innerHTML = `<span style="color: #34D399; font-weight: bold;">✓</span><span>App approved: ${name}</span>`;
   if (logContainer) logContainer.prepend(row);
 
   closeModal('modal-add-app');
-  alert(`✓ Protocol "${name}" added to approved whitelist!`);
+  showToast(`"${name}" is now on your approved list.`, 'success', 'App Approved');
 }
 
 // Policy Change Notification
 function notifyPolicyChange(policyName = 'General') {
   const feed = document.getElementById('dynamic-activity-log');
-  const time = new Date().toLocaleTimeString();
+  const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   const row = document.createElement('div');
   row.className = 'activity-row';
-  row.innerHTML = `<span style="color: #34D399; font-weight: bold;">✓</span><span>${policyName} policy updated (${time})</span>`;
+  row.innerHTML = `<span style="color: #34D399; font-weight: bold;">✓</span><span>${policyName} rule updated (${time})</span>`;
   if (feed) feed.prepend(row);
 }
 
 function savePermissionsModal() {
   closeModal('modal-permissions');
-  notifyPolicyChange('All Permissions');
-  alert('✓ Global policy permissions successfully synchronized.');
+  notifyPolicyChange('Safety Rules');
+  showToast('Your safety rules have been saved and applied.', 'success', 'Rules Active');
 }
 
 async function loadData() {
@@ -237,13 +276,14 @@ async function runTestRequest() {
     if (data.error) {
       row.innerHTML = `<span style="color: #F87171; font-weight: bold;">✕</span><span>${amount} ETH blocked (${data.error})</span>`;
       if (logContainer) logContainer.prepend(row);
-      alert(`🔴 TRANSACTION BLOCKED BY GUARD\n\n${data.error}`);
+      showToast(data.error, 'danger', 'Move Blocked');
     } else if (data.decision && data.decision.passed) {
-      row.innerHTML = `<span style="color: #34D399; font-weight: bold;">✓</span><span>${amount} ETH proposed by ${data.proposal?.agentName || app} (Awaiting approval)</span>`;
+      row.innerHTML = `<span style="color: #34D399; font-weight: bold;">✓</span><span>${amount} ETH move from ${data.proposal?.agentName || app} (Waiting for your OK)</span>`;
       if (logContainer) logContainer.prepend(row);
+      showToast(`${amount} ETH move requested by ${data.proposal?.agentName || app}. Waiting for your OK.`, 'info', 'Needs Your OK');
       scrollToSection('sec-approvals');
     } else {
-      const reason = data.decision?.reason || 'Exceeds spending limit policy.';
+      const reason = data.decision?.reason || 'Exceeds your 0.05 ETH safety limit.';
       row.innerHTML = `<span style="color: #F87171; font-weight: bold;">✕</span><span>${amount} ETH blocked (${reason})</span>`;
       if (logContainer) logContainer.prepend(row);
 
@@ -258,7 +298,7 @@ async function runTestRequest() {
             <span class="badge-blocked">🔴 Blocked</span>
           </div>
           <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 4px;">
-            To <code>${dest.slice(0, 6)}...${dest.slice(-4)}</code> &bull; Limit: 0.05 ETH
+            To <code>${dest.slice(0, 6)}...${dest.slice(-4)}</code> &bull; Safety Limit: 0.05 ETH
           </div>
           <div style="font-size: 12px; color: var(--text-secondary);">
             <strong>Why?</strong> ${reason}
@@ -267,12 +307,12 @@ async function runTestRequest() {
         dynamicFeed.prepend(card);
       }
 
-      alert(`🔴 TRANSACTION BLOCKED BY GUARD\n\n${reason}`);
+      showToast(`Blocked: ${reason}`, 'danger', 'Move Stopped');
     }
 
     await loadData();
   } catch (err) {
-    alert('Notice: ' + (err?.message || String(err)));
+    showToast(err?.message || String(err), 'danger', 'Notice');
   } finally {
     if (sendBtn) {
       sendBtn.disabled = false;
@@ -288,10 +328,10 @@ async function approveProposal(id) {
     const data = await res.json();
     await loadData();
     if (data.transactionHash) {
-      alert(`✓ Transaction Authorized and Broadcast!\n\nExplorer Tx: ${data.transactionHash}\nNetwork: Robinhood Chain Testnet`);
+      showToast(`Transaction sent! Tx: ${data.transactionHash.slice(0, 10)}... on Robinhood Chain`, 'success', 'Approved & Broadcast');
     }
   } catch (err) {
-    alert('Error: ' + err.message);
+    showToast(err.message, 'danger', 'Execution Error');
   }
 }
 
@@ -300,11 +340,12 @@ async function rejectProposal(id) {
     await fetch(`${API_BASE}/api/proposals/${id}/reject`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ reason: 'Rejected by user.' })
+      body: JSON.stringify({ reason: 'Declined by user.' })
     });
     await loadData();
+    showToast('Transaction declined.', 'info', 'Declined');
   } catch (err) {
-    alert('Error: ' + err.message);
+    showToast(err.message, 'danger', 'Error');
   }
 }
 
