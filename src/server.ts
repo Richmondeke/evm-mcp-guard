@@ -39,7 +39,15 @@ const erc20 = new ethers.Interface([
 
 function ok(data: unknown) { return { content: [{ type: 'text' as const, text: JSON.stringify(data, null, 2) }] }; }
 function err(message: string) { return { isError: true, content: [{ type: 'text' as const, text: message }] }; }
-function validAddress(a: string) { return ethers.isAddress(a); }
+function validAddress(a: string): boolean {
+  if (!a || typeof a !== 'string') return false;
+  if (/^0x[a-fA-F0-9]{40}$/.test(a.trim())) return true;
+  try {
+    return ethers.isAddress(a.trim());
+  } catch {
+    return false;
+  }
+}
 
 // ==========================================
 // 1. MCP SERVER SETUP

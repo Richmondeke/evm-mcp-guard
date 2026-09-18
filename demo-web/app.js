@@ -80,9 +80,10 @@ async function runTestRequest() {
   const amount = Number(document.getElementById('test-amount').value);
   let dest = document.getElementById('test-dest').value.trim();
 
-  // Standardize test destination address
-  if (!dest.startsWith('0x') || dest.length < 42) {
+  // Normalize placeholder / short addresses to standard valid checksum address
+  if (!dest.startsWith('0x') || dest.length !== 42 || dest.includes('...')) {
     dest = '0x8f2c38A9E198D321c17244589d8Ac7399e2991ac';
+    document.getElementById('test-dest').value = dest;
   }
 
   const payload = {
@@ -103,23 +104,50 @@ async function runTestRequest() {
     });
     const data = await res.json();
     
-    // Add to dynamic activity log
     const logContainer = document.getElementById('dynamic-activity-log');
+    const dynamicFeed = document.getElementById('dynamic-proposals-feed');
     const row = document.createElement('div');
     row.className = 'activity-row';
 
-    if (data.decision?.passed) {
-      row.innerHTML = `<span style="color: #34D399; font-weight: bold;">✓</span><span>${amount} ETH proposed by ${data.proposal.agentName} (Awaiting approval)</span>`;
+    if (data.error) {
+      row.innerHTML = `<span style="color: #F87171; font-weight: bold;">✕</span><span>${amount} ETH blocked (${data.error})</span>`;
+      if (logContainer) logContainer.prepend(row);
+      alert(`🔴 TRANSACTION BLOCKED BY GUARD\n\n${data.error}`);
+    } else if (data.decision && data.decision.passed) {
+      row.innerHTML = `<span style="color: #34D399; font-weight: bold;">✓</span><span>${amount} ETH proposed by ${data.proposal?.agentName || app} (Awaiting approval)</span>`;
+      if (logContainer) logContainer.prepend(row);
       scrollToSection('sec-approvals');
     } else {
-      row.innerHTML = `<span style="color: #F87171; font-weight: bold;">✕</span><span>${amount} ETH blocked (${data.decision.reason})</span>`;
-      alert(`🔴 TRANSACTION BLOCKED BY GUARD\n\n${data.decision.reason}`);
+      const reason = data.decision?.reason || 'Exceeds spending limit policy.';
+      row.innerHTML = `<span style="color: #F87171; font-weight: bold;">✕</span><span>${amount} ETH blocked (${reason})</span>`;
+      if (logContainer) logContainer.prepend(row);
+
+      // Inject live card into AI activity feed
+      if (dynamicFeed) {
+        const card = document.createElement('div');
+        card.className = 'card-item card-item-blocked';
+        card.style.marginTop = '10px';
+        card.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+            <strong style="font-size: 15px;">Send ${amount} ETH</strong>
+            <span class="badge-blocked">🔴 Blocked</span>
+          </div>
+          <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 4px;">
+            To <code>${dest.slice(0, 6)}...${dest.slice(-4)}</code> &bull; Limit: 0.05 ETH
+          </div>
+          <div style="font-size: 12px; color: var(--text-secondary);">
+            <strong>Why?</strong> ${reason}
+          </div>
+        `;
+        dynamicFeed.prepend(card);
+      }
+
+      alert(`🔴 TRANSACTION BLOCKED BY GUARD\n\n${reason}`);
     }
-    logContainer.prepend(row);
 
     await loadData();
   } catch (err) {
-    alert('Error running test: ' + err.message);
+    alert('Error running test: ' + (err?.message || String(err)));
   }
 }
 

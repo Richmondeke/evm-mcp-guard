@@ -3,18 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Super EVM Guard — Give your AI apps a safe way to use crypto</title>
+  <title>Chedo — Give your AI apps a safe way to use crypto</title>
+  <link rel="icon" type="image/png" href="chedo-logo.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <div class="guard-container">
     <!-- Header -->
-    <header class="guard-header">
+    <header class="guard-header animate-enter">
       <div class="brand-row">
-        <div class="brand-icon">⚡</div>
+        <img src="chedo-logo.png" alt="Chedo Logo" class="brand-logo-img">
         <div class="brand-text">
-          <h1>Super EVM Guard</h1>
+          <h1>Chedo</h1>
           <p>Give your AI apps a safe way to use crypto.</p>
         </div>
       </div>
@@ -33,11 +34,11 @@
     <!-- Top 4 Summary Cards -->
     <section class="widget-grid-4">
       <!-- 1. Secure Wallet (Blue Shell) -->
-      <article class="guard-widget widget-blue">
+      <article class="guard-widget widget-blue animate-enter delay-1">
         <div class="widget-panel">
           <div class="widget-header-title">🔐 Secure Wallet</div>
-          <div class="widget-val-mono" id="val-wallet">0x742d...f44e</div>
-          <div class="widget-subtext">Wallet protected by Guard</div>
+          <div class="widget-val-mono" id="val-wallet"><span class="skeleton skeleton-text"></span></div>
+          <div class="widget-subtext">Wallet protected by Chedo</div>
         </div>
         <footer class="widget-footer">
           <button class="footer-link" onclick="scrollToSection('sec-apps')">Manage Wallet →</button>
@@ -46,10 +47,10 @@
       </article>
 
       <!-- 2. Treasury (Yellow Shell) -->
-      <article class="guard-widget widget-yellow">
+      <article class="guard-widget widget-yellow animate-enter delay-2">
         <div class="widget-panel">
           <div class="widget-header-title">💰 Treasury</div>
-          <div class="widget-val-big" id="val-balance">1.4580 ETH</div>
+          <div class="widget-val-big" id="val-balance"><span class="skeleton skeleton-text"></span></div>
           <div class="widget-subtext">Robinhood Chain Testnet</div>
         </div>
         <footer class="widget-footer">
@@ -59,7 +60,7 @@
       </article>
 
       <!-- 3. Spending Limits (Cyan Shell) -->
-      <article class="guard-widget widget-cyan">
+      <article class="guard-widget widget-cyan animate-enter delay-3">
         <div class="widget-panel">
           <div class="widget-header-title">🛡️ Spending Limits</div>
           <div class="widget-val-big" style="font-size: 17px;">0.05 ETH &bull; 100 USDC</div>
@@ -72,10 +73,10 @@
       </article>
 
       <!-- 4. Approvals (Coral Shell) -->
-      <article class="guard-widget widget-coral">
+      <article class="guard-widget widget-coral animate-enter delay-4">
         <div class="widget-panel">
           <div class="widget-header-title">✅ Approvals</div>
-          <div class="widget-val-big" id="val-pending">0</div>
+          <div class="widget-val-big" id="val-pending"><span class="skeleton skeleton-pill"></span></div>
           <div class="widget-subtext">Requests waiting for your approval</div>
         </div>
         <footer class="widget-footer">
@@ -86,12 +87,12 @@
     </section>
 
     <!-- AI Activity Section -->
-    <h2 class="section-heading">AI Activity</h2>
-    <p class="section-subheading">See what your AI apps are trying to do before anything happens.</p>
+    <h2 class="section-heading animate-enter delay-4">AI Activity</h2>
+    <p class="section-subheading animate-enter delay-4">See what your AI apps are trying to do before anything happens.</p>
 
     <div class="widget-grid-2">
       <!-- Live / Recent Proposal Card (Yellow Shell) -->
-      <article class="guard-widget widget-yellow">
+      <article class="guard-widget widget-yellow animate-enter delay-5">
         <div class="widget-panel">
           <div class="widget-header-title" style="margin-bottom: 12px;">Request from Alpha Trader</div>
           
@@ -122,7 +123,7 @@
       </article>
 
       <!-- Choose an AI App (Blue Shell) -->
-      <article class="guard-widget widget-blue" id="sec-apps">
+      <article class="guard-widget widget-blue animate-enter delay-5" id="sec-apps">
         <div class="widget-panel">
           <div class="widget-header-title" style="margin-bottom: 12px;">Choose an AI App</div>
 
@@ -148,7 +149,7 @@
           </div>
         </div>
         <footer class="widget-footer">
-          <button class="footer-link" onclick="alert('All 3 AI agent profiles are securely configured and active.')">Manage Access →</button>
+          <button class="footer-link" onclick="alert('All 3 AI agent profiles are securely configured and active in Chedo.')">Manage Access →</button>
           <span>🤖</span>
         </footer>
       </article>
@@ -157,7 +158,7 @@
     <!-- Permissions & Approved Apps -->
     <div class="widget-grid-2">
       <!-- What can your AI do? (Emerald Shell) -->
-      <article class="guard-widget widget-emerald" id="sec-permissions">
+      <article class="guard-widget widget-emerald animate-enter delay-6" id="sec-permissions">
         <div class="widget-panel">
           <div class="widget-header-title">What can your AI do?</div>
           <p style="font-size: 13px; color: var(--text-secondary);">Choose exactly what each app is allowed to access.</p>
@@ -192,7 +193,7 @@
       </article>
 
       <!-- Approved Apps (Cyan Shell) -->
-      <article class="guard-widget widget-cyan">
+      <article class="guard-widget widget-cyan animate-enter delay-6">
         <div class="widget-panel">
           <div class="widget-header-title">Approved Apps</div>
           <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Only approved apps can use your wallet.</p>
@@ -231,7 +232,7 @@
     <!-- Activity & Test Playground -->
     <div class="widget-grid-2">
       <!-- Activity Feed (Dark Shell) -->
-      <article class="guard-widget widget-dark" id="sec-activity">
+      <article class="guard-widget widget-dark animate-enter delay-7" id="sec-activity">
         <div class="widget-panel dark">
           <div class="widget-header-title" style="color: #FFF;">Activity</div>
           <p style="font-size: 13px; color: #9CA3AF; margin-bottom: 14px;">Everything your AI apps do is recorded here.</p>
@@ -264,10 +265,10 @@
       </article>
 
       <!-- Test It (Yellow Shell) -->
-      <article class="guard-widget widget-yellow" id="sec-test">
+      <article class="guard-widget widget-yellow animate-enter delay-7" id="sec-test">
         <div class="widget-panel">
           <div class="widget-header-title">Test It</div>
-          <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Try sending a transaction and see how Guard protects your wallet.</p>
+          <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Try sending a transaction and see how Chedo protects your wallet.</p>
 
           <label class="guard-label">Choose an app</label>
           <select class="guard-select" id="test-app">
@@ -287,7 +288,7 @@
           <input class="guard-input" type="number" step="0.01" id="test-amount" value="0.08">
 
           <label class="guard-label">Destination</label>
-          <input class="guard-input" type="text" id="test-dest" value="0x8f2...91ac">
+          <input class="guard-input" type="text" id="test-dest" value="0x8f2c38A9E198D321c17244589d8Ac7399e2991ac">
 
           <button class="btn-guard-primary" onclick="runTestRequest()">Send Test Request</button>
         </div>
@@ -299,7 +300,7 @@
     </div>
 
     <!-- Human Approval Section -->
-    <article class="guard-widget widget-coral" id="sec-approvals" style="margin-bottom: 24px;">
+    <article class="guard-widget widget-coral animate-enter delay-8" id="sec-approvals" style="margin-bottom: 24px;">
       <div class="widget-panel">
         <div class="widget-header-title">Human Approval</div>
         <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 14px;">
@@ -308,7 +309,7 @@
 
         <div id="human-approval-box">
           <div class="card-item" style="text-align: center; color: var(--text-secondary); font-weight: 600; padding: 20px;">
-            No requests waiting
+            <span class="skeleton" style="width: 140px; height: 18px;"></span>
           </div>
         </div>
       </div>
@@ -319,11 +320,11 @@
     </article>
 
     <!-- Bottom Security Banner -->
-    <article class="guard-widget widget-emerald" style="margin-bottom: 30px;">
+    <article class="guard-widget widget-emerald animate-enter delay-8" style="margin-bottom: 30px;">
       <div class="widget-panel">
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
           <div>
-            <div style="font-size: 16px; font-weight: 800; margin-bottom: 4px;">Guard is protecting your wallet</div>
+            <div style="font-size: 16px; font-weight: 800; margin-bottom: 4px;">Chedo is protecting your wallet</div>
             <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #065F46; margin-bottom: 2px;">
               <span class="dot-green"></span> <strong>Protection ON</strong>
             </div>

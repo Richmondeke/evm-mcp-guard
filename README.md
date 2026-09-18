@@ -1,18 +1,18 @@
-# 🛡️ EVM MCP Guard
+# 🛡️ Chedo (EVM Guard)
 
 **The Autonomous AI Agent Security Layer & Policy Gateway for EVM Blockchains.**
 
-[![Network: Base Sepolia](https://img.shields.io/badge/Network-Base%20Sepolia%20(84532)-blue)](https://sepolia.basescan.org)
+[![Network: Robinhood Chain Testnet](https://img.shields.io/badge/Network-Robinhood%20Chain%20(46630)-green)](https://explorer.testnet.robinhood.com)
 [![MCP Version: 1.18+](https://img.shields.io/badge/MCP-1.18%2B-cyan)](https://modelcontextprotocol.io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 ---
 
-## 💡 What is EVM MCP Guard?
+## 💡 What is Chedo?
 
 Giving an autonomous AI agent (Claude, Cursor, custom bot) a raw private key is financial catastrophe waiting to happen. A single prompt injection, corrupted oracle feed, or LLM hallucination can drain a treasury in a single block.
 
-**EVM MCP Guard** solves this by establishing a deterministic, policy-enforced boundary between AI agents and on-chain EVM wallets.
+**Chedo** solves this by establishing a deterministic, policy-enforced boundary between AI agents and on-chain EVM wallets.
 
 ```text
 ┌──────────────────────────┐
