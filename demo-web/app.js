@@ -42,15 +42,19 @@ function toggleFormInputs() {
   }
 }
 
+let currentExplorerBase = 'https://explorer.testnet.chain.robinhood.com';
+
 async function loadData() {
   try {
     const res = await fetch(`${API_BASE}/api/status`);
     const data = await res.json();
 
+    if (data.explorerBase) currentExplorerBase = data.explorerBase;
     document.getElementById('vault-address').textContent = `${data.walletAddress.slice(0, 6)}...${data.walletAddress.slice(-4)}`;
     document.getElementById('treasury-balance').innerHTML = `<span style="color: #2563EB;">${data.balanceEth}</span> ETH`;
     document.getElementById('pending-counter').textContent = data.pendingProposalsCount;
-    document.getElementById('supler-mode').textContent = data.mode === 'live_testnet' ? '● Base Sepolia Live' : '● Guard Rails Active (Demo)';
+    document.getElementById('supler-network').textContent = `${data.network} (${data.chainId})`;
+    document.getElementById('supler-mode').textContent = data.mode === 'live_testnet' ? `● ${data.network} Live` : '● Guard Rails Active (Demo)';
 
     await loadProposals();
   } catch (err) {
@@ -108,7 +112,7 @@ async function loadProposals() {
 
           ${p.transactionHash ? `
             <div style="font-size: 11px; color: #2563EB; margin-top: 4px;">
-              BaseScan Receipt: <a href="https://sepolia.basescan.org/tx/${p.transactionHash}" target="_blank" style="color: #2563EB; font-weight: 700; text-decoration: underline;">${p.transactionHash.slice(0, 16)}...</a>
+              Explorer Receipt: <a href="${currentExplorerBase}/tx/${p.transactionHash}" target="_blank" style="color: #2563EB; font-weight: 700; text-decoration: underline;">${p.transactionHash.slice(0, 16)}...</a>
             </div>
           ` : ''}
 

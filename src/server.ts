@@ -15,10 +15,13 @@ import { TransactionProposal } from './types.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const rpc = process.env.EVM_RPC_URL;
+const rpc = process.env.EVM_RPC_URL || 'https://rpc.testnet.chain.robinhood.com';
 const privateKey = process.env.EVM_PRIVATE_KEY;
-const chainId = Number(process.env.CHAIN_ID || 84532); // Default: Base Sepolia
+const chainId = Number(process.env.CHAIN_ID || 46630); // Default: Robinhood Chain Testnet (46630)
 const HTTP_PORT = Number(process.env.PORT || 3000);
+
+const networkName = chainId === 46630 ? 'Robinhood Chain Testnet' : chainId === 4663 ? 'Robinhood Chain Mainnet' : chainId === 84532 ? 'Base Sepolia' : 'EVM Network';
+const explorerBase = chainId === 46630 ? 'https://explorer.testnet.chain.robinhood.com' : chainId === 4663 ? 'https://explorer.mainnet.chain.robinhood.com' : 'https://sepolia.basescan.org';
 
 const provider = rpc ? new ethers.JsonRpcProvider(rpc, chainId) : null;
 const wallet = provider && privateKey ? new ethers.Wallet(privateKey, provider) : null;
@@ -72,7 +75,7 @@ mcpServer.setRequestHandler(CallToolRequestSchema, async req => {
           mode: wallet ? 'live_testnet' : 'demo_simulation',
           configured: !!wallet,
           address: wallet?.address ?? '0x742d35Cc6634C0532925a3b844Bc454e4438f44e',
-          network: 'Base Sepolia',
+          network: networkName,
           chainId,
           rpc: rpc ? 'Connected' : 'Mock Simulator',
           policies: policyEngine.getConfig()
@@ -82,12 +85,12 @@ mcpServer.setRequestHandler(CallToolRequestSchema, async req => {
 
       case 'get_native_balance': {
         if (!provider) {
-          return ok({ mode: 'demo_simulation', network: 'Base Sepolia (84532)', address: a.address || wallet?.address || '0x742d35Cc6634C0532925a3b844Bc454e4438f44e', balanceEth: '1.4580', symbol: 'ETH' });
+          return ok({ mode: 'demo_simulation', network: `${networkName} (${chainId})`, address: a.address || wallet?.address || '0x742d35Cc6634C0532925a3b844Bc454e4438f44e', balanceEth: '1.4580', symbol: 'ETH' });
         }
         const address = a.address || wallet?.address;
         if (!address || !validAddress(address)) return err('Invalid Ethereum address format');
         const balWei = await provider.getBalance(address);
-        return ok({ network: 'Base Sepolia', address, balanceEth: ethers.formatEther(balWei), symbol: 'ETH' });
+        return ok({ network: networkName, address, balanceEth: ethers.formatEther(balWei), symbol: 'ETH' });
       }
 
       case 'get_token_balance': {
@@ -336,12 +339,12 @@ mcpServer.setRequestHandler(CallToolRequestSchema, async req => {
             mode: 'demo_simulation',
             status: 'confirmed',
             transactionHash: simulatedHash,
-            explorerUrl: `https://sepolia.basescan.org/tx/${simulatedHash}`,
+            explorerUrl: `${explorerBase}/tx/${simulatedHash}`,
             proposal: p
           });
         }
 
-        // Live Real Base Sepolia Execution
+        // Live Real Network Execution
         let tx: any;
         if (p.type === 'native_transfer') {
           tx = await wallet.sendTransaction({
@@ -378,10 +381,10 @@ mcpServer.setRequestHandler(CallToolRequestSchema, async req => {
 
         return ok({
           status: 'confirmed',
-          network: 'Base Sepolia',
+          network: networkName,
           transactionHash: receipt.hash,
           blockNumber: receipt.blockNumber,
-          explorerUrl: `https://sepolia.basescan.org/tx/${receipt.hash}`,
+          explorerUrl: `${explorerBase}/tx/${receipt.hash}`,
           proposal: p
         });
       }
@@ -416,11 +419,12 @@ app.use(express.static(path.join(__dirname, '../demo-web')));
 
 app.get('/api/status', async (_req, res) => {
   res.json({
-    name: 'EVM MCP Guard',
+    name: 'Supler EVM Guard',
     version: '0.2.0',
     mode: wallet ? 'live_testnet' : 'demo_simulation',
-    network: 'Base Sepolia',
+    network: networkName,
     chainId,
+    explorerBase,
     walletAddress: wallet?.address ?? '0x742d35Cc6634C0532925a3b844Bc454e4438f44e',
     balanceEth: wallet && provider ? ethers.formatEther(await provider.getBalance(wallet.address)) : '1.4580',
     pendingProposalsCount: Array.from(proposals.values()).filter(p => p.status === 'pending_approval').length,
