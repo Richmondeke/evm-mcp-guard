@@ -599,23 +599,25 @@ app.get('/api/agents', (_req, res) => res.json(policyEngine.getAgents()));
 app.get('/api/allowlists', (_req, res) => res.json(policyEngine.getAllowlists()));
 app.get('/api/audit-logs', (_req, res) => res.json(auditLogger.getLogs(100)));
 
-// Start HTTP Server safely
-if (process.env.RUN_STDIO !== 'true') {
+// Start HTTP Server safely if not in serverless or stdio mode
+if (process.env.RUN_STDIO !== 'true' && !process.env.VERCEL) {
   const serverInstance = app.listen(HTTP_PORT, () => {
-    console.log(`[Supler EVM Guard] Web Dashboard & API active at: http://localhost:${HTTP_PORT}`);
+    console.log(`[Chedo EVM Guard] Web Dashboard & API active at: http://localhost:${HTTP_PORT}`);
   });
   serverInstance.on('error', (err: any) => {
     if (err.code === 'EADDRINUSE') {
-      console.log(`[Supler EVM Guard] Port ${HTTP_PORT} is already in use; continuing in MCP Stdio mode.`);
+      console.log(`[Chedo EVM Guard] Port ${HTTP_PORT} is already in use; continuing in MCP Stdio mode.`);
     } else {
-      console.error('[Supler EVM Guard] HTTP error:', err);
+      console.error('[Chedo EVM Guard] HTTP error:', err);
     }
   });
 }
 
 // Start MCP stdio transport if running in stdio CLI mode or piped
-if (process.env.RUN_STDIO === 'true' || !process.stdin.isTTY) {
+if ((process.env.RUN_STDIO === 'true' || !process.stdin.isTTY) && !process.env.VERCEL) {
   const transport = new StdioServerTransport();
   await mcpServer.connect(transport);
 }
 
+export { app };
+export default app;
