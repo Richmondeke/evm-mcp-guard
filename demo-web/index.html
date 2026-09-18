@@ -3,373 +3,343 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Supler EVM Guard — Autonomous Agent Policy & Execution Switchboard</title>
+  <title>Super EVM Guard — Give your AI apps a safe way to use crypto</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <div class="supler-app">
+  <div class="guard-container">
     <!-- Header -->
-    <header class="supler-header">
-      <div class="supler-brand">
-        <div class="supler-logo">⚡</div>
-        <div class="supler-title">
-          <h1>Supler EVM Guard</h1>
-          <p>Deterministic Policy Gate & Isolated Signer for Autonomous Agents</p>
+    <header class="guard-header">
+      <div class="brand-row">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-text">
+          <h1>Super EVM Guard</h1>
+          <p>Give your AI apps a safe way to use crypto.</p>
         </div>
       </div>
-      <div class="supler-controls">
-        <a href="token.html" class="supler-tab" style="text-decoration: none; color: #2563EB; font-weight: 700; border-color: #BFDBFE;">🪙 $GUARD Token & Staking</a>
-        <button class="btn-supler-pitch" onclick="openPitchModal()">⚡ 60s Pitch for Amaan</button>
-        <div class="supler-pill">
-          <span class="pill-dot"></span>
-          <span id="supler-network">Robinhood Chain Testnet (46630)</span>
+      <div class="header-badges">
+        <a href="token.html" class="link-token">🪙 $GUARD & Staking</a>
+        <div class="pill">
+          <span>Robinhood Chain Testnet</span>
         </div>
-        <div class="supler-pill" id="supler-mode">
-          ● Guard Rails Active
+        <div class="pill pill-green">
+          <span class="dot-green"></span>
+          <span>Protection is ON</span>
         </div>
       </div>
     </header>
 
-    <!-- Top Supler Summary Widgets -->
-    <section class="widget-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-bottom: 24px;">
-      <!-- Signer Vault Card (Blue Accent Shell) -->
-      <article class="supler-widget widget-blue">
+    <!-- Top 4 Summary Cards -->
+    <section class="widget-grid-4">
+      <!-- 1. Secure Wallet (Blue Shell) -->
+      <article class="guard-widget widget-blue">
         <div class="widget-panel">
-          <header class="widget-header">
-            <h3 class="widget-title">Signer Vault</h3>
-            <span class="widget-collapse-btn">⌃</span>
-          </header>
-          <div style="font-size: 15px; font-weight: 700; font-family: monospace;" id="vault-address">0x742d...f44e</div>
-          <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Isolated Private Key Signer</div>
+          <div class="widget-header-title">🔐 Secure Wallet</div>
+          <div class="widget-val-mono" id="val-wallet">0x742d...f44e</div>
+          <div class="widget-subtext">Wallet protected by Guard</div>
         </div>
         <footer class="widget-footer">
-          <button class="widget-action-link" onclick="switchTab('agents')">Manage Vault Access ›</button>
-          <div class="widget-nav-arrows">
-            <button class="widget-nav-btn">‹</button>
-            <button class="widget-nav-btn">›</button>
-          </div>
+          <button class="footer-link" onclick="scrollToSection('sec-apps')">Manage Wallet →</button>
+          <span>🛡️</span>
         </footer>
       </article>
 
-      <!-- Available Balance (Yellow Accent Shell) -->
-      <article class="supler-widget widget-yellow">
+      <!-- 2. Treasury (Yellow Shell) -->
+      <article class="guard-widget widget-yellow">
         <div class="widget-panel">
-          <header class="widget-header">
-            <h3 class="widget-title">Robinhood Treasury</h3>
-            <span class="widget-collapse-btn">⌃</span>
-          </header>
-          <div style="font-size: 20px; font-weight: 900;" id="treasury-balance"><span style="color: #2563EB;">1.4580</span> ETH</div>
-          <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">Robinhood Chain Testnet (46630)</div>
+          <div class="widget-header-title">💰 Treasury</div>
+          <div class="widget-val-big" id="val-balance">1.4580 ETH</div>
+          <div class="widget-subtext">Robinhood Chain Testnet</div>
         </div>
         <footer class="widget-footer">
-          <button class="widget-action-link" onclick="switchTab('simulation')">Simulate Gas Diff ›</button>
-          <div class="widget-nav-arrows">
-            <button class="widget-nav-btn">‹</button>
-            <button class="widget-nav-btn">›</button>
-          </div>
+          <button class="footer-link" onclick="scrollToSection('sec-activity')">View Activity →</button>
+          <span>📈</span>
         </footer>
       </article>
 
-      <!-- Policy Limits (Cyan Accent Shell) -->
-      <article class="supler-widget widget-cyan">
+      <!-- 3. Spending Limits (Cyan Shell) -->
+      <article class="guard-widget widget-cyan">
         <div class="widget-panel">
-          <header class="widget-header">
-            <h3 class="widget-title">Guard Ceilings</h3>
-            <span class="widget-collapse-btn">⌃</span>
-          </header>
-          <div style="font-size: 15px; font-weight: 700;">0.050 ETH &bull; 100 USDC</div>
-          <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Per-Tx Spending Policy</div>
+          <div class="widget-header-title">🛡️ Spending Limits</div>
+          <div class="widget-val-big" style="font-size: 17px;">0.05 ETH &bull; 100 USDC</div>
+          <div class="widget-subtext">Maximum allowed per transaction</div>
         </div>
         <footer class="widget-footer">
-          <button class="widget-action-link" onclick="switchTab('allowlists')">View Allowlist Rules ›</button>
-          <div class="widget-nav-arrows">
-            <button class="widget-nav-btn">‹</button>
-            <button class="widget-nav-btn">›</button>
-          </div>
+          <button class="footer-link" onclick="scrollToSection('sec-permissions')">Manage Limits →</button>
+          <span>🔒</span>
         </footer>
       </article>
 
-      <!-- Pending Approval Deck (Coral Accent Shell) -->
-      <article class="supler-widget widget-coral">
+      <!-- 4. Approvals (Coral Shell) -->
+      <article class="guard-widget widget-coral">
         <div class="widget-panel">
-          <header class="widget-header">
-            <h3 class="widget-title">Approval Deck</h3>
-            <span class="widget-collapse-btn">⌃</span>
-          </header>
-          <div style="font-size: 20px; font-weight: 900;" id="pending-counter">0</div>
-          <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">Proposals Awaiting Sign-off</div>
+          <div class="widget-header-title">✅ Approvals</div>
+          <div class="widget-val-big" id="val-pending">0</div>
+          <div class="widget-subtext">Requests waiting for your approval</div>
         </div>
         <footer class="widget-footer">
-          <button class="widget-action-link" onclick="switchTab('proposals')">Review Deck Queue ›</button>
-          <div class="widget-nav-arrows">
-            <button class="widget-nav-btn">‹</button>
-            <button class="widget-nav-btn">›</button>
-          </div>
+          <button class="footer-link" onclick="scrollToSection('sec-approvals')">View Requests →</button>
+          <span>📋</span>
         </footer>
       </article>
     </section>
 
-    <!-- Navigation Tabs -->
-    <div class="supler-tabs">
-      <button class="supler-tab active" onclick="switchTab('proposals')">⚡ Switchboard & Proposals</button>
-      <button class="supler-tab" onclick="switchTab('simulation')">🔬 Pre-Flight Simulator</button>
-      <button class="supler-tab" onclick="switchTab('agents')">🤖 Agent RBAC Delegations</button>
-      <button class="supler-tab" onclick="switchTab('allowlists')">📜 Contract Allowlists</button>
-      <button class="supler-tab" onclick="switchTab('audit')">🛡️ Immutable Audit Feed</button>
-      <button class="supler-tab" onclick="switchTab('connect')">🔌 Connect Claude / Cursor</button>
-    </div>
+    <!-- AI Activity Section -->
+    <h2 class="section-heading">AI Activity</h2>
+    <p class="section-subheading">See what your AI apps are trying to do before anything happens.</p>
 
-    <!-- VIEW 1: Switchboard & Proposals -->
-    <div id="view-proposals" class="tab-view active">
-      <div class="widget-grid" style="grid-template-columns: 1fr 1.3fr;">
-        <!-- Generator Form (Blue Shell) -->
-        <article class="supler-widget widget-blue">
-          <div class="widget-panel">
-            <header class="widget-header">
-              <h3 class="widget-title">Agent Proposal Trigger</h3>
-              <span class="widget-collapse-btn">⌃</span>
-            </header>
-            <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 14px;">
-              Simulate an incoming transaction request initiated by an autonomous AI agent over MCP.
-            </p>
-            <div class="supler-form-group">
-              <label class="supler-label">Calling Agent Identity</label>
-              <select class="supler-select" id="input-agent">
-                <option value="agent_quant_01">Alpha Trader Bot (Base Sepolia) — Daily Cap: 0.5 ETH</option>
-                <option value="agent_analyst_01">Portfolio Monitor (Read-Only) — Daily Cap: 0 ETH</option>
-                <option value="agent_admin_01">Security Guardian / Admin — Daily Cap: 10 ETH</option>
-              </select>
-            </div>
-            <div class="supler-form-group">
-              <label class="supler-label">Action Intent</label>
-              <select class="supler-select" id="input-type" onchange="toggleFormInputs()">
-                <option value="native_transfer">Native Transfer (ETH on Base)</option>
-                <option value="token_transfer">ERC-20 Token Transfer (USDC)</option>
-                <option value="contract_call">Allowlisted Contract Call (WETH Deposit)</option>
-              </select>
-            </div>
-            <div class="supler-form-group">
-              <label class="supler-label">Destination Address</label>
-              <input class="supler-input" type="text" id="input-to" value="0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC">
-            </div>
-            <div class="supler-form-group">
-              <label class="supler-label" id="amount-label">Amount (ETH) &bull; Cap: 0.05 ETH</label>
-              <input class="supler-input" type="number" step="0.001" id="input-amount" value="0.005">
-            </div>
-            <div class="supler-btn-row">
-              <button class="btn-supler-action btn-supler-primary" onclick="submitSuplerProposal()">🚀 Dispatch Proposal</button>
-              <button class="btn-supler-action btn-supler-secondary" onclick="testViolation()">⚠️ Test Limit Block</button>
-            </div>
-          </div>
-          <footer class="widget-footer">
-            <span class="widget-action-link">Supler Policy Engine Active</span>
-            <div class="widget-nav-arrows"><button class="widget-nav-btn">●</button></div>
-          </footer>
-        </article>
-
-        <!-- Live Proposals Queue (Yellow Shell) -->
-        <article class="supler-widget widget-yellow">
-          <div class="widget-panel">
-            <header class="widget-header">
-              <h3 class="widget-title">Human Authorization Switchboard</h3>
-              <button class="widget-collapse-btn" onclick="loadData()">🔄</button>
-            </header>
-            <div id="supler-proposals-stream">
-              <!-- Dynamically Populated -->
-            </div>
-          </div>
-          <footer class="widget-footer">
-            <span class="widget-action-link">Instant Signed Execution on Base</span>
-            <div class="widget-nav-arrows">
-              <button class="widget-nav-btn">‹</button>
-              <button class="widget-nav-btn">›</button>
-            </div>
-          </footer>
-        </article>
-      </div>
-    </div>
-
-    <!-- VIEW 2: Pre-Flight Simulation -->
-    <div id="view-simulation" class="tab-view">
-      <article class="supler-widget widget-cyan">
+    <div class="widget-grid-2">
+      <!-- Live / Recent Proposal Card (Yellow Shell) -->
+      <article class="guard-widget widget-yellow">
         <div class="widget-panel">
-          <header class="widget-header">
-            <h3 class="widget-title">Transaction Simulation & Gas Prediction Engine</h3>
-            <span class="widget-collapse-btn">⌃</span>
-          </header>
-          <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">
-            Every proposed action is simulated via <code>eth_call</code> and <code>eth_estimateGas</code> prior to human sign-off.
-          </p>
-          <div class="widget-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 0;">
+          <div class="widget-header-title" style="margin-bottom: 12px;">Request from Alpha Trader</div>
+          
+          <div class="card-item card-item-blocked">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+              <strong style="font-size: 16px;">Send 0.08 ETH</strong>
+              <span class="badge-blocked">🔴 Blocked</span>
+            </div>
+            <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 6px;">
+              To <code style="font-weight: 700; color: var(--text-primary);">0x8f2...91ac</code>
+            </div>
+            <div style="font-size: 12px; font-weight: 700; color: #B91C1C; margin-bottom: 4px;">
+              Limit: 0.05 ETH
+            </div>
+            <div style="font-size: 12px; color: var(--text-secondary);">
+              <strong>Why?</strong> This transaction is above your spending limit.
+            </div>
+          </div>
+
+          <div id="dynamic-proposals-feed">
+            <!-- Dynamically injected new proposals appear here -->
+          </div>
+        </div>
+        <footer class="widget-footer">
+          <button class="footer-link" onclick="scrollToSection('sec-test')">View Details →</button>
+          <span>‹ ›</span>
+        </footer>
+      </article>
+
+      <!-- Choose an AI App (Blue Shell) -->
+      <article class="guard-widget widget-blue" id="sec-apps">
+        <div class="widget-panel">
+          <div class="widget-header-title" style="margin-bottom: 12px;">Choose an AI App</div>
+
+          <div class="card-item">
+            <strong style="font-size: 14px;">Alpha Trader</strong>
+            <div style="font-size: 13px; color: var(--text-secondary); margin-top: 2px;">
+              Can trade and send up to <strong>0.5 ETH/day</strong>
+            </div>
+          </div>
+
+          <div class="card-item">
+            <strong style="font-size: 14px;">Portfolio Monitor</strong>
+            <div style="font-size: 13px; color: var(--text-secondary); margin-top: 2px;">
+              Read-only access
+            </div>
+          </div>
+
+          <div class="card-item">
+            <strong style="font-size: 14px;">Security Guardian</strong>
+            <div style="font-size: 13px; color: var(--text-secondary); margin-top: 2px;">
+              Can manage up to <strong>10 ETH/day</strong>
+            </div>
+          </div>
+        </div>
+        <footer class="widget-footer">
+          <button class="footer-link" onclick="alert('All 3 AI agent profiles are securely configured and active.')">Manage Access →</button>
+          <span>🤖</span>
+        </footer>
+      </article>
+    </div>
+
+    <!-- Permissions & Approved Apps -->
+    <div class="widget-grid-2">
+      <!-- What can your AI do? (Emerald Shell) -->
+      <article class="guard-widget widget-emerald" id="sec-permissions">
+        <div class="widget-panel">
+          <div class="widget-header-title">What can your AI do?</div>
+          <p style="font-size: 13px; color: var(--text-secondary);">Choose exactly what each app is allowed to access.</p>
+
+          <div class="checkbox-group">
+            <label class="checkbox-row">
+              <input type="checkbox" checked onchange="notifyPolicyChange()">
+              <span>Send ETH</span>
+            </label>
+            <label class="checkbox-row">
+              <input type="checkbox" checked onchange="notifyPolicyChange()">
+              <span>Send USDC</span>
+            </label>
+            <label class="checkbox-row">
+              <input type="checkbox" checked onchange="notifyPolicyChange()">
+              <span>Use approved contracts</span>
+            </label>
+            <label class="checkbox-row">
+              <input type="checkbox" onchange="notifyPolicyChange()">
+              <span>Approve new tokens</span>
+            </label>
+            <label class="checkbox-row">
+              <input type="checkbox" onchange="notifyPolicyChange()">
+              <span>Change wallet settings</span>
+            </label>
+          </div>
+        </div>
+        <footer class="widget-footer">
+          <button class="footer-link" onclick="alert('Granular permission policies applied.')">Manage Permissions →</button>
+          <span>⚙️</span>
+        </footer>
+      </article>
+
+      <!-- Approved Apps (Cyan Shell) -->
+      <article class="guard-widget widget-cyan">
+        <div class="widget-panel">
+          <div class="widget-header-title">Approved Apps</div>
+          <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Only approved apps can use your wallet.</p>
+
+          <div class="card-item" style="display: flex; justify-content: space-between; align-items: center;">
             <div>
-              <div class="supler-form-group">
-                <label class="supler-label">Target Contract / Recipient</label>
-                <input class="supler-input" type="text" id="sim-dest" value="0x4200000000000000000000000000000000000006">
-              </div>
-              <div class="supler-form-group">
-                <label class="supler-label">Value (ETH)</label>
-                <input class="supler-input" type="number" id="sim-val" value="0.01">
-              </div>
-              <button class="btn-supler-action btn-supler-primary" onclick="runSimulation()">Execute Deep Simulation</button>
+              <strong>WETH</strong>
+              <div style="font-size: 12px; color: var(--text-secondary);">Canonical Wrapped Ether</div>
             </div>
+            <span class="badge-approved">Approved</span>
+          </div>
+
+          <div class="card-item" style="display: flex; justify-content: space-between; align-items: center;">
             <div>
-              <div class="sim-callout" id="sim-output" style="min-height: 130px;">
-                <strong>Simulation Inspector:</strong><br>
-                Status: Ready<br>
-                Gas Estimation: Pending<br>
-                Revert Risk: 0%
-              </div>
+              <strong>USDC</strong>
+              <div style="font-size: 12px; color: var(--text-secondary);">Circle USD Coin</div>
             </div>
+            <span class="badge-approved">Approved</span>
+          </div>
+
+          <div class="card-item" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong>Uniswap</strong>
+              <div style="font-size: 12px; color: var(--text-secondary);">Verified Router v3</div>
+            </div>
+            <span class="badge-approved">Approved</span>
           </div>
         </div>
         <footer class="widget-footer">
-          <span class="widget-action-link">Pre-Execution State Inspection</span>
-          <div class="widget-nav-arrows"><button class="widget-nav-btn">✓</button></div>
+          <button class="footer-link" onclick="addNewAppPrompt()">+ Add App</button>
+          <span>📜</span>
         </footer>
       </article>
     </div>
 
-    <!-- VIEW 3: Agent RBAC Delegations -->
-    <div id="view-agents" class="tab-view">
-      <article class="supler-widget widget-emerald">
-        <div class="widget-panel">
-          <header class="widget-header">
-            <h3 class="widget-title">Agent Identities, Roles & Daily Spending Quotas</h3>
-            <span class="widget-collapse-btn">⌃</span>
-          </header>
-          <table class="supler-table">
-            <thead>
-              <tr>
-                <th>Agent Key</th>
-                <th>Identity Name</th>
-                <th>Role</th>
-                <th>Daily Limit</th>
-                <th>Spent Today</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody id="supler-agents-tbody"></tbody>
-          </table>
-        </div>
-        <footer class="widget-footer">
-          <span class="widget-action-link">Multi-Agent Isolation Protocol</span>
-          <div class="widget-nav-arrows"><button class="widget-nav-btn">🛡️</button></div>
-        </footer>
-      </article>
-    </div>
-
-    <!-- VIEW 4: Contract Allowlists -->
-    <div id="view-allowlists" class="tab-view">
-      <article class="supler-widget widget-blue">
-        <div class="widget-panel">
-          <header class="widget-header">
-            <h3 class="widget-title">Verified Smart Contract & Function Allowlists</h3>
-            <span class="widget-collapse-btn">⌃</span>
-          </header>
-          <table class="supler-table">
-            <thead>
-              <tr>
-                <th>Protocol Name</th>
-                <th>Contract Address</th>
-                <th>Network</th>
-                <th>Allowed Methods</th>
-              </tr>
-            </thead>
-            <tbody id="supler-allowlist-tbody"></tbody>
-          </table>
-        </div>
-        <footer class="widget-footer">
-          <span class="widget-action-link">Strict Calldata Whitelist Enforcement</span>
-          <div class="widget-nav-arrows"><button class="widget-nav-btn">📜</button></div>
-        </footer>
-      </article>
-    </div>
-
-    <!-- VIEW 5: Audit Log -->
-    <div id="view-audit" class="tab-view">
-      <article class="supler-widget widget-dark">
+    <!-- Activity & Test Playground -->
+    <div class="widget-grid-2">
+      <!-- Activity Feed (Dark Shell) -->
+      <article class="guard-widget widget-dark" id="sec-activity">
         <div class="widget-panel dark">
-          <header class="widget-header">
-            <h3 class="widget-title" style="color: #FFF;">Immutable Security Audit Feed</h3>
-            <button class="widget-collapse-btn" style="color: #FFF;" onclick="loadAuditLogs()">🔄</button>
-          </header>
-          <div class="audit-terminal" id="supler-audit-feed"></div>
+          <div class="widget-header-title" style="color: #FFF;">Activity</div>
+          <p style="font-size: 13px; color: #9CA3AF; margin-bottom: 14px;">Everything your AI apps do is recorded here.</p>
+
+          <div style="font-size: 12px; font-weight: 800; color: #9CA3AF; text-transform: uppercase; margin-bottom: 8px;">Today</div>
+
+          <div class="activity-row">
+            <span style="color: #34D399; font-weight: bold;">✓</span>
+            <span>0.02 ETH sent</span>
+          </div>
+          <div class="activity-row">
+            <span style="color: #34D399; font-weight: bold;">✓</span>
+            <span>USDC balance checked</span>
+          </div>
+          <div class="activity-row">
+            <span style="color: #F87171; font-weight: bold;">✕</span>
+            <span>0.08 ETH blocked</span>
+          </div>
+          <div class="activity-row">
+            <span style="color: #34D399; font-weight: bold;">✓</span>
+            <span>WETH deposit approved</span>
+          </div>
+
+          <div id="dynamic-activity-log"></div>
         </div>
         <footer class="widget-footer">
-          <span class="widget-action-link">Chronological Cryptographic Audit Trail</span>
-          <div class="widget-nav-arrows"><button class="widget-nav-btn">●</button></div>
+          <button class="footer-link" style="color: #FFF;" onclick="loadData()">View All Activity →</button>
+          <span>●</span>
+        </footer>
+      </article>
+
+      <!-- Test It (Yellow Shell) -->
+      <article class="guard-widget widget-yellow" id="sec-test">
+        <div class="widget-panel">
+          <div class="widget-header-title">Test It</div>
+          <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Try sending a transaction and see how Guard protects your wallet.</p>
+
+          <label class="guard-label">Choose an app</label>
+          <select class="guard-select" id="test-app">
+            <option value="agent_quant_01">Alpha Trader</option>
+            <option value="agent_analyst_01">Portfolio Monitor</option>
+            <option value="agent_admin_01">Security Guardian</option>
+          </select>
+
+          <label class="guard-label">What should it do?</label>
+          <select class="guard-select" id="test-action">
+            <option value="native_transfer">Send ETH</option>
+            <option value="token_transfer">Send USDC</option>
+            <option value="contract_call">Use Approved Contract</option>
+          </select>
+
+          <label class="guard-label">Amount</label>
+          <input class="guard-input" type="number" step="0.01" id="test-amount" value="0.08">
+
+          <label class="guard-label">Destination</label>
+          <input class="guard-input" type="text" id="test-dest" value="0x8f2...91ac">
+
+          <button class="btn-guard-primary" onclick="runTestRequest()">Send Test Request</button>
+        </div>
+        <footer class="widget-footer">
+          <span class="footer-link">Instant Policy Feedback</span>
+          <span>⚡</span>
         </footer>
       </article>
     </div>
 
-    <!-- VIEW 6: Connect Claude / Cursor -->
-    <div id="view-connect" class="tab-view">
-      <article class="supler-widget widget-yellow">
-        <div class="widget-panel">
-          <header class="widget-header">
-            <h3 class="widget-title">Connect to Claude Desktop, Cursor & ChatGPT</h3>
-            <span class="widget-collapse-btn">⌃</span>
-          </header>
-          <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">
-            Add the Supler EVM Guard MCP server to your local Claude Desktop or Cursor configuration.
-          </p>
-          <div class="supler-form-group">
-            <label class="supler-label">Claude Desktop Configuration</label>
-            <textarea class="supler-input" rows="8" readonly style="font-family: monospace; font-size: 12px; background: #FFF;">
-{
-  "mcpServers": {
-    "supler-evm-guard": {
-      "command": "node",
-      "args": ["/Users/cambelliino../Downloads/evm-mcp/dist/src/server.js"],
-      "env": {
-        "EVM_RPC_URL": "https://sepolia.base.org",
-        "CHAIN_ID": "84532",
-        "RUN_STDIO": "true"
-      }
-    }
-  }
-}</textarea>
+    <!-- Human Approval Section -->
+    <article class="guard-widget widget-coral" id="sec-approvals" style="margin-bottom: 24px;">
+      <div class="widget-panel">
+        <div class="widget-header-title">Human Approval</div>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 14px;">
+          Nothing happens without your permission when approval is required.
+        </p>
+
+        <div id="human-approval-box">
+          <div class="card-item" style="text-align: center; color: var(--text-secondary); font-weight: 600; padding: 20px;">
+            No requests waiting
           </div>
         </div>
-        <footer class="widget-footer">
-          <span class="widget-action-link">MCP 1.18+ Standard Protocol</span>
-          <div class="widget-nav-arrows"><button class="widget-nav-btn">🔌</button></div>
-        </footer>
-      </article>
-    </div>
+      </div>
+      <footer class="widget-footer">
+        <span class="footer-link">1-Click Authorization Gate</span>
+        <span>✅</span>
+      </footer>
+    </article>
 
-  </div>
+    <!-- Bottom Security Banner -->
+    <article class="guard-widget widget-emerald" style="margin-bottom: 30px;">
+      <div class="widget-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <div style="font-size: 16px; font-weight: 800; margin-bottom: 4px;">Guard is protecting your wallet</div>
+            <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #065F46; margin-bottom: 2px;">
+              <span class="dot-green"></span> <strong>Protection ON</strong>
+            </div>
+            <div style="font-size: 13px; color: var(--text-secondary);">Your limits and permissions are active.</div>
+          </div>
+          <div>
+            <button class="btn-guard-primary" style="width: auto; padding: 10px 20px;" onclick="scrollToSection('sec-permissions')">View Security Settings →</button>
+          </div>
+        </div>
+      </div>
+      <footer class="widget-footer">
+        <span class="footer-link">Continuous Autonomous Safeguard</span>
+        <span>🛡️</span>
+      </footer>
+    </article>
 
-  <!-- Amaan 60s Pitch Modal -->
-  <div class="supler-modal" id="supler-pitch-modal">
-    <div class="supler-modal-box">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-        <h2 style="font-size: 20px; font-weight: 800;">⚡ 60-Second Investor Pitch for Amaan</h2>
-        <button class="widget-collapse-btn" onclick="closePitchModal()">✕</button>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 12px; font-size: 13px;">
-        <div style="background: #EFF6FF; padding: 12px 14px; border-radius: 12px; border-left: 4px solid var(--accent-blue);">
-          <strong>1. The Vulnerability (10s):</strong><br>
-          "AI agents are taking over on-chain finance, but giving raw private keys to LLMs is financial Russian roulette. One hallucination drains the entire treasury."
-        </div>
-        <div style="background: #FEF3C7; padding: 12px 14px; border-radius: 12px; border-left: 4px solid var(--accent-yellow);">
-          <strong>2. What We Built: Supler EVM Guard (20s):</strong><br>
-          "We built the deterministic security gateway. The agent proposes $\rightarrow$ our policy engine checks limits and simulates gas $\rightarrow$ humans approve via 1-click switchboard $\rightarrow$ executes safely on Base."
-        </div>
-        <div style="background: #D1FAE5; padding: 12px 14px; border-radius: 12px; border-left: 4px solid var(--accent-emerald);">
-          <strong>3. Token & Robinhood Expansion (20s):</strong><br>
-          "We can launch the <strong>$GUARD</strong> token for agent staking, insurance pools, and decentralized policy curation, while plugging directly into <strong>Robinhood Connect</strong> for retail liquidity."
-        </div>
-        <div style="background: #FEE2E2; padding: 12px 14px; border-radius: 12px; border-left: 4px solid var(--accent-coral);">
-          <strong>4. Live Proof (10s):</strong><br>
-          "Look at our dashboard: live agent proposals, auto-blocked limit violations, and on-chain Base Sepolia execution."
-        </div>
-      </div>
-      <div style="margin-top: 20px; text-align: right;">
-        <button class="btn-supler-action btn-supler-primary" onclick="closePitchModal()">Close & Test Live Demo</button>
-      </div>
-    </div>
   </div>
 
   <script src="app.js"></script>
