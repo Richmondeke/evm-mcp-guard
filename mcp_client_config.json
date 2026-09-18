@@ -1,0 +1,37 @@
+{
+  "claudeDesktop": {
+    "path": "~/Library/Application Support/Claude/claude_desktop_config.json",
+    "config": {
+      "mcpServers": {
+        "evm-mcp-guard": {
+          "command": "node",
+          "args": ["/Users/cambelliino../Downloads/evm-mcp/dist/src/server.js"],
+          "env": {
+            "EVM_RPC_URL": "https://sepolia.base.org",
+            "CHAIN_ID": "84532",
+            "MAX_NATIVE_ETH": "0.05",
+            "MAX_TOKEN_AMOUNT": "100",
+            "REQUIRE_APPROVAL": "true",
+            "RUN_STDIO": "true"
+          }
+        }
+      }
+    }
+  },
+  "cursor": {
+    "path": ".cursor/mcp.json",
+    "config": {
+      "mcpServers": {
+        "evm-mcp-guard": {
+          "command": "node",
+          "args": ["/Users/cambelliino../Downloads/evm-mcp/dist/src/server.js"],
+          "env": {
+            "EVM_RPC_URL": "https://sepolia.base.org",
+            "CHAIN_ID": "84532",
+            "RUN_STDIO": "true"
+          }
+        }
+      }
+    }
+  }
+}
