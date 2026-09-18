@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>$GUARD Token — The Economic Security Layer for Autonomous AI Agents</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .token-hero {
+      text-align: center;
+      padding: 40px 20px 50px 20px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .token-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: var(--surface-white);
+      border: 1px solid var(--border-subtle);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent-blue);
+      margin-bottom: 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .token-hero h1 {
+      font-size: 44px;
+      font-weight: 900;
+      letter-spacing: -1.2px;
+      line-height: 1.15;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+    .token-hero p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+    .hero-cta-group {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-hero-primary {
+      background: var(--accent-blue);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(45, 110, 240, 0.35);
+      transition: transform 0.15s;
+    }
+    .btn-hero-primary:hover {
+      transform: translateY(-2px);
+    }
+    .btn-hero-secondary {
+      background: var(--surface-white);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .btn-hero-secondary:hover {
+      border-color: var(--text-muted);
+    }
+    .tokenomics-bar {
+      height: 24px;
+      border-radius: 12px;
+      display: flex;
+      overflow: hidden;
+      margin: 16px 0 24px 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .token-slice {
+      height: 100%;
+      transition: opacity 0.2s;
+    }
+    .token-slice:hover { opacity: 0.85; }
+    .calc-slider {
+      width: 100%;
+      margin: 14px 0;
+      accent-color: var(--accent-blue);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="supler-app">
+    <!-- Top Header -->
+    <header class="supler-header">
+      <div class="supler-brand">
+        <div class="supler-logo">🛡️</div>
+        <div class="supler-title">
+          <h1>$GUARD Protocol</h1>
+          <p>Economic Security, Staking & Policy Oracles on Base</p>
+        </div>
+      </div>
+      <div class="supler-controls">
+        <a href="index.html" class="supler-tab" style="text-decoration: none;">⚡ Open Live App Switchboard</a>
+        <div class="supler-pill">
+          <span class="pill-dot"></span>
+          <span>Native on Base (L2)</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="token-hero">
+      <div class="token-badge">🪙 Base Network Token &bull; Utility & Staking</div>
+      <h1>The Economic Security Token for Autonomous AI Agents</h1>
+      <p>
+        Giving AI agents raw keys is financial Russian roulette. <strong>$GUARD</strong> powers decentralized staking, insurance slashing pools, and community-verified policy allowlists backing billions in automated agent execution.
+      </p>
+      <div class="hero-cta-group">
+        <a href="index.html" class="btn-hero-primary">Launch Live Control Plane</a>
+        <a href="https://github.com/Richmondeke/evm-mcp-guard/blob/main/TOKEN_AND_EXCHANGE_STRATEGY.md" target="_blank" class="btn-hero-secondary">Read Tokenomics Strategy</a>
+      </div>
+    </section>
+
+    <!-- Live Metrics Grid -->
+    <section class="widget-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-bottom: 32px;">
+      <!-- Total Supply (Yellow Shell) -->
+      <article class="supler-widget widget-yellow">
+        <div class="widget-panel">
+          <header class="widget-header">
+            <h3 class="widget-title">Total Supply</h3>
+            <span class="widget-collapse-btn">⌃</span>
+          </header>
+          <div style="font-size: 22px; font-weight: 900;">1,000,000,000</div>
+          <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">$GUARD (Fixed Cap)</div>
+        </div>
+        <footer class="widget-footer">
+          <span class="widget-action-link">Zero Inflation Protocol</span>
+          <div class="widget-nav-arrows"><button class="widget-nav-btn">🔒</button></div>
+        </footer>
+      </article>
+
+      <!-- Network (Blue Shell) -->
+      <article class="supler-widget widget-blue">
+        <div class="widget-panel">
+          <header class="widget-header">
+            <h3 class="widget-title">Primary L2 Chain</h3>
+            <span class="widget-collapse-btn">⌃</span>
+          </header>
+          <div style="font-size: 22px; font-weight: 900;">Base (Coinbase L2)</div>
+          <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">Sub-cent fees & instant finality</div>
+        </div>
+        <footer class="widget-footer">
+          <span class="widget-action-link">Coinbase Ecosystem Bridge</span>
+          <div class="widget-nav-arrows"><button class="widget-nav-btn">⚡</button></div>
+        </footer>
+      </article>
+
+      <!-- Staking Pool (Emerald Shell) -->
+      <article class="supler-widget widget-emerald">
+        <div class="widget-panel">
+          <header class="widget-header">
+            <h3 class="widget-title">Agent Staking Target</h3>
+            <span class="widget-collapse-btn">⌃</span>
+          </header>
+          <div style="font-size: 22px; font-weight: 900; color: #059669;">18.4% APY</div>
+          <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">Protocol fee redistribution</div>
+        </div>
+        <footer class="widget-footer">
+          <span class="widget-action-link">Agent Slashing Underwriting</span>
+          <div class="widget-nav-arrows"><button class="widget-nav-btn">🛡️</button></div>
+        </footer>
+      </article>
+
+      <!-- Liquidity Venue (Cyan Shell) -->
+      <article class="supler-widget widget-cyan">
+        <div class="widget-panel">
+          <header class="widget-header">
+            <h3 class="widget-title">Target DEX / Retail</h3>
+            <span class="widget-collapse-btn">⌃</span>
+          </header>
+          <div style="font-size: 18px; font-weight: 800;">Aerodrome &bull; Robinhood</div>
+          <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">Direct Robinhood Connect on-ramp</div>
+        </div>
+        <footer class="widget-footer">
+          <span class="widget-action-link">Retail Brokerage Bridge</span>
+          <div class="widget-nav-arrows"><button class="widget-nav-btn">📈</button></div>
+        </footer>
+      </article>
+    </section>
+
+    <!-- Token Utility & Mechanics (4 Core Pillars) -->
+    <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 20px; letter-spacing: -0.5px;">Core $GUARD Utility Pillars</h2>
+    
+    <div class="widget-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+      <!-- 1. Agent Bonding -->
+      <article class="supler-widget widget-blue">
+        <div class="widget-panel">
+          <header class="widget-header">
+            <h3 class="widget-title">1. Agent Bonding & Registration</h3>
+            <span class="widget-collapse-btn">⌃</span>
+          </header>
+          <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
+            AI bot operators stake $GUARD to register their <code>agent_id</code> and unlock higher automated transaction allowances. If an agent attempts malicious calldata or unapproved drains, its bond is slashed.
+          </p>
+          <div class="sim-callout">
+            Bond Ratio: <strong>1,000 $GUARD</strong> staked unlocks <strong>1.0 ETH</strong> daily execution bandwidth.
+          </div>
+        </div>
+        <footer class="widget-footer">
+          <span class="widget-action-link">Automated Slashing Protection</span>
+          <div class="widget-nav-arrows"><button class="widget-nav-btn">›</button></div>
+        </footer>
+      </article>
+
+      <!-- 2. Insurance Pool -->
+      <article class="supler-widget widget-emerald">
+        <div class="widget-panel">
+          <header class="widget-header">
+            <h3 class="widget-title">2. Underwriting Insurance Pool</h3>
+            <span class="widget-collapse-btn">⌃</span>
+          </header>
+          <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
+            Staked tokens form a shared backstop underwriting treasury. In the event of a smart contract exploit on an allowlisted router, stakers act as the first-loss capital buffer and earn high protocol fee yield.
+          </p>
+          <div class="sim-callout" style="background: #ECFDF5; border-color: #A7F3D0; color: #065F46;">
+            100% On-Chain Solvency Proofs via Base Sepolia & Mainnet Oracles.
+          </div>
+        </div>
+        <footer class="widget-footer">
+          <span class="widget-action-link">Yield from Protocol Volume</span>
+          <div class="widget-nav-arrows"><button class="widget-nav-btn">›</button></div>
+        </footer>
+      </article>
+
+      <!-- 3. Policy Oracles -->
+      <article class="supler-widget widget-yellow">
+        <div class="widget-panel">
+          <header class="widget-header">
+            <h3 class="widget-title">3. Curated Policy Allowlist Oracles</h3>
+            <span class="widget-collapse-btn">⌃</span>
+          </header>
+          <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
+            Token holders vote to curate and verify official DeFi routers (Uniswap v3, Aerodrome, Aave, Circle USDC). Only contracts approved by token consensus are added to the agent default allowlist.
+          </p>
+          <div class="sim-callout" style="background: #FEFCE8; border-color: #FEF08A; color: #854D0E;">
+            Prevents Phishing & Malicious Fake Token Contracts.
+          </div>
+        </div>
+        <footer class="widget-footer">
+          <span class="widget-action-link">Decentralized Governance</span>
+          <div class="widget-nav-arrows"><button class="widget-nav-btn">›</button></div>
+        </footer>
+      </article>
+
+      <!-- 4. Revenue Share -->
+      <article class="supler-widget widget-coral">
+        <div class="widget-panel">
+          <header class="widget-header">
+            <h3 class="widget-title">4. Protocol Revenue Sharing</h3>
+            <span class="widget-collapse-btn">⌃</span>
+          </header>
+          <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
+            A 0.05% fee charged on authorized high-volume agent transactions is routed directly into the <strong>$GUARD Buyback & Staker Reward Pool</strong> on Base.
+          </p>
+          <div class="sim-callout" style="background: #FFF1F2; border-color: #FECDD3; color: #9F1239;">
+            Direct economic alignment with autonomous AI transaction growth.
+          </div>
+        </div>
+        <footer class="widget-footer">
+          <span class="widget-action-link">Continuous Buyback Mechanics</span>
+          <div class="widget-nav-arrows"><button class="widget-nav-btn">›</button></div>
+        </footer>
+      </article>
+    </div>
+
+    <!-- Token Allocation Breakdown -->
+    <article class="supler-widget widget-dark" style="margin-top: 32px;">
+      <div class="widget-panel dark">
+        <header class="widget-header">
+          <h3 class="widget-title" style="color: #FFF; font-size: 18px;">Token Distribution & Tokenomics</h3>
+          <span class="widget-collapse-btn" style="color: #FFF;">⌃</span>
+        </header>
+        
+        <p style="font-size: 13px; color: #9CA3AF; margin-bottom: 12px;">
+          Fair allocation designed for long-term network security, developer adoption, and deep on-chain liquidity.
+        </p>
+
+        <div class="tokenomics-bar">
+          <div class="token-slice" style="width: 40%; background: #2D6EF0;" title="Community & Staking: 40%"></div>
+          <div class="token-slice" style="width: 25%; background: #10B981;" title="Developer Grants: 25%"></div>
+          <div class="token-slice" style="width: 15%; background: #FDE046;" title="Core Protocol: 15%"></div>
+          <div class="token-slice" style="width: 10%; background: #7BD2FB;" title="DEX Liquidity: 10%"></div>
+          <div class="token-slice" style="width: 10%; background: #FF6B6B;" title="Insurance Treasury: 10%"></div>
+        </div>
+
+        <table class="supler-table" style="color: #E5E7EB;">
+          <thead>
+            <tr>
+              <th style="color: #9CA3AF;">Allocation Bucket</th>
+              <th style="color: #9CA3AF;">Percentage</th>
+              <th style="color: #9CA3AF;">Amount</th>
+              <th style="color: #9CA3AF;">Vesting & Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span style="display:inline-block; width:10px; height:10px; background:#2D6EF0; border-radius:50%; margin-right:6px;"></span><strong>Community & Agent Staking</strong></td>
+              <td><strong>40.0%</strong></td>
+              <td>400,000,000 $GUARD</td>
+              <td>Emitted over 4 years to bot operators and insurance stakers</td>
+            </tr>
+            <tr>
+              <td><span style="display:inline-block; width:10px; height:10px; background:#10B981; border-radius:50%; margin-right:6px;"></span><strong>Ecosystem & AI Developer Grants</strong></td>
+              <td><strong>25.0%</strong></td>
+              <td>250,000,000 $GUARD</td>
+              <td>Grants for Claude, Cursor, and Eliza agent integrations</td>
+            </tr>
+            <tr>
+              <td><span style="display:inline-block; width:10px; height:10px; background:#FDE046; border-radius:50%; margin-right:6px;"></span><strong>Core Contributors & Security Audit</strong></td>
+              <td><strong>15.0%</strong></td>
+              <td>150,000,000 $GUARD</td>
+              <td>2-year linear vesting with 6-month cliff</td>
+            </tr>
+            <tr>
+              <td><span style="display:inline-block; width:10px; height:10px; background:#7BD2FB; border-radius:50%; margin-right:6px;"></span><strong>Aerodrome / Base Liquidity Pool</strong></td>
+              <td><strong>10.0%</strong></td>
+              <td>100,000,000 $GUARD</td>
+              <td>100% paired with WETH/USDC & locked in LP</td>
+            </tr>
+            <tr>
+              <td><span style="display:inline-block; width:10px; height:10px; background:#FF6B6B; border-radius:50%; margin-right:6px;"></span><strong>Insurance Treasury Backstop</strong></td>
+              <td><strong>10.0%</strong></td>
+              <td>100,000,000 $GUARD</td>
+              <td>Multi-sig reserve for sub-delegated agent executions</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <footer class="widget-footer">
+        <span class="widget-action-link" style="color:#FFF;">Deterministic Fixed Supply Mechanics</span>
+        <div class="widget-nav-arrows"><button class="widget-nav-btn">●</button></div>
+      </footer>
+    </article>
+
+    <!-- Interactive Staking Simulator -->
+    <article class="supler-widget widget-yellow" style="margin-top: 32px;">
+      <div class="widget-panel">
+        <header class="widget-header">
+          <h3 class="widget-title">Interactive Agent Staking & Yield Calculator</h3>
+          <span class="widget-collapse-btn">⌃</span>
+        </header>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 14px;">
+          Estimate your staking yield and unlocked agent execution quotas.
+        </p>
+
+        <label class="supler-label">Amount to Stake ($GUARD): <span id="calc-stake-val" style="color: var(--accent-blue); font-size: 14px;">50,000 $GUARD</span></label>
+        <input type="range" class="calc-slider" id="stake-slider" min="5000" max="500000" step="5000" value="50000" oninput="updateStakingCalc()">
+
+        <div class="widget-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 14px; margin-bottom: 0;">
+          <div class="sim-callout" style="text-align: center;">
+            <div style="font-size: 11px; text-transform: uppercase;">Estimated APY</div>
+            <div style="font-size: 20px; font-weight: 900; color: #059669;" id="calc-apy">18.4%</div>
+          </div>
+          <div class="sim-callout" style="text-align: center;">
+            <div style="font-size: 11px; text-transform: uppercase;">Yearly Staking Yield</div>
+            <div style="font-size: 20px; font-weight: 900; color: #2563EB;" id="calc-yield">9,200 $GUARD</div>
+          </div>
+          <div class="sim-callout" style="text-align: center;">
+            <div style="font-size: 11px; text-transform: uppercase;">Unlocked Agent Capacity</div>
+            <div style="font-size: 20px; font-weight: 900; color: #D97706;" id="calc-cap">50.0 ETH / Day</div>
+          </div>
+        </div>
+      </div>
+      <footer class="widget-footer">
+        <span class="widget-action-link">Simulate Staking Returns</span>
+        <div class="widget-nav-arrows"><button class="widget-nav-btn">›</button></div>
+      </footer>
+    </article>
+
+    <!-- Robinhood & Exchange Migration Roadmap -->
+    <article class="supler-widget widget-cyan" style="margin-top: 32px; margin-bottom: 40px;">
+      <div class="widget-panel">
+        <header class="widget-header">
+          <h3 class="widget-title">Robinhood & Retail Exchange Migration Roadmap</h3>
+          <span class="widget-collapse-btn">⌃</span>
+        </header>
+        
+        <div class="widget-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-bottom: 0;">
+          <div style="background: #F8FAFC; padding: 14px; border-radius: 12px; border: 1px solid var(--border-subtle);">
+            <div class="risk-badge risk-low" style="margin-bottom: 8px;">Phase 1: Base Launch</div>
+            <h4 style="font-size: 14px; margin-bottom: 6px;">Aerodrome DEX & Staking</h4>
+            <p style="font-size: 12px; color: var(--text-secondary);">
+              Fair launch on Base DEXs with locked LP. Staking vault opens for Claude and Cursor agent operators.
+            </p>
+          </div>
+
+          <div style="background: #F8FAFC; padding: 14px; border-radius: 12px; border: 1px solid var(--border-subtle);">
+            <div class="risk-badge risk-medium" style="margin-bottom: 8px;">Phase 2: Robinhood Connect</div>
+            <h4 style="font-size: 14px; margin-bottom: 6px;">Direct Retail On-Ramp</h4>
+            <p style="font-size: 12px; color: var(--text-secondary);">
+              Integrate Robinhood Connect SDK so retail users fund agent vaults directly from Robinhood fiat balances.
+            </p>
+          </div>
+
+          <div style="background: #F8FAFC; padding: 14px; border-radius: 12px; border: 1px solid var(--border-subtle);">
+            <div class="risk-badge risk-low" style="margin-bottom: 8px;">Phase 3: Institutional Tier-1</div>
+            <h4 style="font-size: 14px; margin-bottom: 6px;">Safe & CEX Expansion</h4>
+            <p style="font-size: 12px; color: var(--text-secondary);">
+              Multi-sig Safe smart account modules (ERC-4337) and Coinbase/Binance listing compliance.
+            </p>
+          </div>
+
+          <div style="background: #F8FAFC; padding: 14px; border-radius: 12px; border: 1px solid var(--border-subtle);">
+            <div class="risk-badge risk-low" style="margin-bottom: 8px;">Phase 4: Robinhood Crypto</div>
+            <h4 style="font-size: 14px; margin-bottom: 6px;">Direct Brokerage Listing</h4>
+            <p style="font-size: 12px; color: var(--text-secondary);">
+              Application for Robinhood Crypto spot listing as the leading AI security utility asset.
+            </p>
+          </div>
+        </div>
+      </div>
+      <footer class="widget-footer">
+        <span class="widget-action-link">Strategic Retail Distribution Pathway</span>
+        <div class="widget-nav-arrows"><button class="widget-nav-btn">🚀</button></div>
+      </footer>
+    </article>
+
+    <!-- Footer -->
+    <footer style="text-align: center; color: var(--text-secondary); font-size: 13px; padding: 20px 0;">
+      Supler EVM Guard &bull; Built for Autonomous AI Agent Safety on Base &bull; <a href="index.html" style="color: var(--accent-blue); text-decoration: underline;">Launch App Switchboard</a>
+    </footer>
+
+  </div>
+
+  <script>
+    function updateStakingCalc() {
+      const val = Number(document.getElementById('stake-slider').value);
+      document.getElementById('calc-stake-val').textContent = val.toLocaleString() + ' $GUARD';
+      const apy = 18.4;
+      const yearlyYield = Math.round(val * (apy / 100));
+      const dailyCap = (val / 1000).toFixed(1);
+      
+      document.getElementById('calc-yield').textContent = yearlyYield.toLocaleString() + ' $GUARD';
+      document.getElementById('calc-cap').textContent = dailyCap + ' ETH / Day';
+    }
+  </script>
+</body>
+</html>
