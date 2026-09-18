@@ -1,30 +1,141 @@
 const API_BASE = window.location.origin;
 
+// Flow State
+let globalWalletAddress = '0x742d35Cc6634C0532925a3b844Bc454e4438f44e';
+let currentLimits = { eth: 0.05, usdc: 100, threshold: 0.02 };
+
 function scrollToSection(id) {
   const el = document.getElementById(id);
   if (el) el.scrollIntoView({ behavior: 'smooth' });
 }
 
-function notifyPolicyChange() {
+// Modal System
+function openModal(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.add('active');
+}
+
+function closeModal(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.remove('active');
+}
+
+function closeModalOnBackdrop(e, id) {
+  if (e.target.id === id) {
+    closeModal(id);
+  }
+}
+
+// Card Flow 1: Manage Wallet
+function copyWalletAddress() {
+  navigator.clipboard?.writeText(globalWalletAddress);
+  alert(`✓ Copied to clipboard:\n${globalWalletAddress}`);
+}
+
+// Card Flow 2: Manage Limits
+function saveSpendingLimits() {
+  const eth = parseFloat(document.getElementById('input-limit-eth').value) || 0.05;
+  const usdc = parseFloat(document.getElementById('input-limit-usdc').value) || 100;
+  currentLimits.eth = eth;
+  currentLimits.usdc = usdc;
+
+  const displayEl = document.getElementById('val-limits-display');
+  if (displayEl) {
+    displayEl.textContent = `${eth} ETH • ${usdc} USDC`;
+  }
+
+  const logContainer = document.getElementById('dynamic-activity-log');
+  const row = document.createElement('div');
+  row.className = 'activity-row';
+  row.innerHTML = `<span style="color: #34D399; font-weight: bold;">✓</span><span>Spending limits updated: Max ${eth} ETH / ${usdc} USDC</span>`;
+  if (logContainer) logContainer.prepend(row);
+
+  closeModal('modal-limits');
+  alert(`✓ Policy Updated!\n\nMax per tx: ${eth} ETH • ${usdc} USDC`);
+}
+
+// Card Flow 3: Select AI App from Card
+function selectAppForTest(agentId) {
+  const testAppSelect = document.getElementById('test-app');
+  if (testAppSelect) {
+    testAppSelect.value = agentId;
+  }
+  scrollToSection('sec-test');
+  const logContainer = document.getElementById('dynamic-activity-log');
+  const row = document.createElement('div');
+  row.className = 'activity-row';
+  row.innerHTML = `<span style="color: #60A5FA; font-weight: bold;">ℹ</span><span>Active app focused: ${agentId}</span>`;
+  if (logContainer) logContainer.prepend(row);
+}
+
+// Card Flow 4: Proposal Details
+function openProposalDetailsModal() {
+  openModal('modal-proposal-details');
+}
+
+// Card Flow 5: Add Approved App / Protocol
+function submitNewApprovedApp() {
+  const name = document.getElementById('new-app-name').value.trim();
+  const address = document.getElementById('new-app-address').value.trim();
+  if (!name) {
+    alert('Please enter a protocol name (e.g. Aave v3)');
+    return;
+  }
+
+  const list = document.getElementById('approved-apps-list');
+  if (list) {
+    const card = document.createElement('div');
+    card.className = 'card-item';
+    card.style.display = 'flex';
+    card.style.justifyContent = 'space-between';
+    card.style.alignItems = 'center';
+    card.style.animation = 'fadeInRow 0.3s ease-out';
+    card.innerHTML = `
+      <div>
+        <strong>${name}</strong>
+        <div style="font-size: 12px; color: var(--text-secondary);">${address ? address.slice(0, 10) + '...' : 'Verified Contract'}</div>
+      </div>
+      <span class="badge-approved">Approved</span>
+    `;
+    list.prepend(card);
+  }
+
+  const logContainer = document.getElementById('dynamic-activity-log');
+  const row = document.createElement('div');
+  row.className = 'activity-row';
+  row.innerHTML = `<span style="color: #34D399; font-weight: bold;">✓</span><span>Protocol Whitelisted: ${name}</span>`;
+  if (logContainer) logContainer.prepend(row);
+
+  closeModal('modal-add-app');
+  alert(`✓ Protocol "${name}" added to approved whitelist!`);
+}
+
+// Policy Change Notification
+function notifyPolicyChange(policyName = 'General') {
   const feed = document.getElementById('dynamic-activity-log');
   const time = new Date().toLocaleTimeString();
   const row = document.createElement('div');
   row.className = 'activity-row';
-  row.innerHTML = `<span style="color: #34D399; font-weight: bold;">✓</span><span>Permission settings updated (${time})</span>`;
-  feed.prepend(row);
+  row.innerHTML = `<span style="color: #34D399; font-weight: bold;">✓</span><span>${policyName} policy updated (${time})</span>`;
+  if (feed) feed.prepend(row);
 }
 
-function addNewAppPrompt() {
-  const name = prompt('Enter protocol or contract name to approve (e.g. Aave v3, Curve):');
-  if (name) {
-    alert(`Protocol "${name}" successfully added to approved apps.`);
-  }
+function savePermissionsModal() {
+  closeModal('modal-permissions');
+  notifyPolicyChange('All Permissions');
+  alert('✓ Global policy permissions successfully synchronized.');
 }
 
 async function loadData() {
   try {
     const res = await fetch(`${API_BASE}/api/status`);
     const data = await res.json();
+
+    if (data.walletAddress) {
+      globalWalletAddress = data.walletAddress;
+      const modalAddr = document.getElementById('modal-wallet-address');
+      if (modalAddr) modalAddr.textContent = data.walletAddress;
+    }
 
     document.getElementById('val-wallet').textContent = `${data.walletAddress.slice(0, 6)}...${data.walletAddress.slice(-4)}`;
     document.getElementById('val-balance').textContent = `${data.balanceEth} ETH`;
