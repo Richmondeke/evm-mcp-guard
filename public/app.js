@@ -207,13 +207,27 @@ async function runTestRequest() {
     functionName: action === 'contract_call' ? 'deposit' : undefined
   };
 
+  const sendBtn = document.querySelector('#sec-test button.btn-guard-primary');
+  const originalBtnText = sendBtn ? sendBtn.textContent : 'Send Test Request →';
+  if (sendBtn) {
+    sendBtn.disabled = true;
+    sendBtn.textContent = 'Simulating & Evaluating Policy...';
+  }
+
   try {
     const res = await fetch(`${API_BASE}/api/proposals`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    const data = await res.json();
+
+    const responseText = await res.text();
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch (_parseErr) {
+      throw new Error(`Server returned ${res.status}: ${responseText.slice(0, 100)}`);
+    }
     
     const logContainer = document.getElementById('dynamic-activity-log');
     const dynamicFeed = document.getElementById('dynamic-proposals-feed');
@@ -258,7 +272,12 @@ async function runTestRequest() {
 
     await loadData();
   } catch (err) {
-    alert('Error running test: ' + (err?.message || String(err)));
+    alert('Notice: ' + (err?.message || String(err)));
+  } finally {
+    if (sendBtn) {
+      sendBtn.disabled = false;
+      sendBtn.textContent = originalBtnText;
+    }
   }
 }
 

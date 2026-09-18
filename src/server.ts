@@ -615,8 +615,14 @@ if (process.env.RUN_STDIO !== 'true' && !process.env.VERCEL) {
 
 // Start MCP stdio transport if running in stdio CLI mode or piped
 if ((process.env.RUN_STDIO === 'true' || !process.stdin.isTTY) && !process.env.VERCEL) {
-  const transport = new StdioServerTransport();
-  await mcpServer.connect(transport);
+  (async () => {
+    try {
+      const transport = new StdioServerTransport();
+      await mcpServer.connect(transport);
+    } catch (e) {
+      console.error('[Chedo MCP] Stdio connect error:', e);
+    }
+  })();
 }
 
 export { app };

@@ -494,6 +494,22 @@ body {
   transform: scale(1.06) rotate(-2deg);
 }
 
+/* Raw Logo Without Container */
+.brand-logo-raw {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  transition: transform 0.2s ease;
+}
+
+.brand-logo-raw:hover {
+  transform: scale(1.08);
+}
+
 /* ==========================================================================
    Interactive Modals & Dialog System
    ========================================================================== */
